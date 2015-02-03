@@ -19,7 +19,8 @@ var hbsfy = require('hbsfy');
 gulp.task('scripts', function () {
 	var opts = {
 		entries: './js/app.js',
-		debug: (gutil.env.type === 'development')
+		debug: (gutil.env.type === 'development'),
+		extensions: ['.hbs']
 	}
 	if (watching) {
 		 opts = xtend(opts, watchify.args);
