@@ -35,19 +35,45 @@ var UrlView = InputView.extend({
 });
 
 var TitleView = InputView.extend({
+	derived: {
+		'showInput': {
+			deps: ['model.title'],
+			fn: function () {
+				return !!this.model.title;
+			}
+		}
+	},
 	bindings: extend({}, InputView.prototype.bindings, {
 		'model.title': {
 			type: 'value',
 			selector: 'input'
+		},
+		'showInput': {
+			type: 'booleanClass',
+			yes: 'active',
+			no: 'inactive'
 		}
 	})
 });
 
 var DescriptionView = InputView.extend({
+	derived: {
+		'showInput': {
+			deps: ['model.description'],
+			fn: function () {
+				return !!this.model.description;
+			}
+		}
+	},
 	bindings: extend({}, InputView.prototype.bindings, {
 		'model.description': {
 			type: 'value',
 			selector: 'textarea'
+		},
+		'showInput': {
+			type: 'booleanClass',
+			yes: 'active',
+			no: 'inactive'
 		}
 	})
 });
