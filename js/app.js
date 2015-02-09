@@ -2,5 +2,7 @@
 
 var MainView = require('./views/main');
 
-var main = new MainView();
+var main = new MainView({
+	el: document.querySelector('.main')
+});
 main.render();
