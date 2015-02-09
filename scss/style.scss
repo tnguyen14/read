@@ -21,6 +21,11 @@ body {
 		padding: 2em;
 		width: 80%;
 	}
+	fieldset {
+		border: none;
+		margin: 0;
+		padding: 0;
+	}
 	label {
 		display: block;
 		padding: 1.5em 0;
