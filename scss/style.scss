@@ -1,4 +1,43 @@
+html {
+	box-sizing: border-box;
+}
+
+* {
+	box-sizing: inherit;
+}
+
+body {
+	background-color: #f5f5f5;
+}
+
 .save {
+	background-color: #fff;
+	border: 1px solid #e0e0e0;
+	border-radius: 1px;
+	margin: 0 auto;
+	padding: 2em 1em;
+	width: 100%;
+	@media (min-width: 37.5em) {
+		padding: 2em;
+		width: 80%;
+	}
+	label {
+		display: block;
+		padding: 1.5em 0;
+	}
+	[data-hook="label"] {
+		display: block;
+		float: left;
+		width: 25%;
+	}
+	input,
+	textarea {
+		padding: 1em;
+		width: 75%;
+	}
+	textarea {
+		height: 7em;
+	}
 	.inactive {
 		display: none;
 	}
