@@ -7,20 +7,13 @@ var extend = require('amp-extend');
 var UrlView = require('./url');
 
 var TitleView = InputView.extend({
-	derived: {
-		'showInput': {
-			deps: ['model.title'],
-			fn: function () {
-				return !!this.model.title;
-			}
-		}
+	initialize: function () {
+		this.listenTo(this.model, 'change:title', function (model, title) {
+			this.setValue(title);
+		});
 	},
 	bindings: extend({}, InputView.prototype.bindings, {
 		'model.title': {
-			type: 'value',
-			selector: 'input'
-		},
-		'showInput': {
 			type: 'booleanClass',
 			yes: 'active',
 			no: 'inactive'
@@ -29,20 +22,14 @@ var TitleView = InputView.extend({
 });
 
 var DescriptionView = InputView.extend({
-	derived: {
-		'showInput': {
-			deps: ['model.description'],
-			fn: function () {
-				return !!this.model.description;
-			}
-		}
+	initialize: function () {
+		var self = this;
+		this.listenTo(this.model, 'change:description', function (model, desc) {
+			this.setValue(desc);
+		});
 	},
 	bindings: extend({}, InputView.prototype.bindings, {
 		'model.description': {
-			type: 'value',
-			selector: 'textarea'
-		},
-		'showInput': {
 			type: 'booleanClass',
 			yes: 'active',
 			no: 'inactive'
