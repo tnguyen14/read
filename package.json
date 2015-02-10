@@ -36,6 +36,7 @@
   },
   "dependencies": {
     "amp-extend": "^1.0.1",
+    "ampersand-collection": "^1.4.0",
     "ampersand-form-view": "^2.2.0",
     "ampersand-input-view": "^3.1.1",
     "ampersand-model": "^4.0.3",
