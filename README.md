@@ -1,49 +1,24 @@
-# sg-read [![Build Status](https://secure.travis-ci.org/tnguyen14/sg-read.png?branch=master)](http://travis-ci.org/tnguyen14/sg-read)
+# Store reading lists
 
-> Reading list for SiteGenesis team
+## List types
+### `email_list`
 
+Supported properties:
 
-## Getting Started
+- `sharer`: *string* email address of the sharer
+- `sent`: *boolean* whether the article has been shared
 
-Install the module with: `npm install sg-read`
+### `personal`
 
-```js
-var sg-read = require('sg-read');
-sg-read.awesome(); // "awesome"
-```
+Supported properties:
 
-Install with cli command
+- `favorite`: *boolean* whether the article is a favorite article
+- `note`: *string* note associated with the article
+- `status`: *string* article status, could be `TO-READ`, `READ`. Default to `READ`.
 
-```sh
-$ npm install -g sg-read
-$ sg-read --help
-$ sg-read --version
-```
+## Default properties
 
+Each article has:
 
-```sh
-# creates a browser.js
-$ grunt browserify
-```
-
-
-
-## Documentation
-
-_(Coming soon)_
-
-
-## Examples
-
-_(Coming soon)_
-
-
-## Contributing
-
-In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com).
-
-
-## License
-
-Copyright (c) 2014 Tri Nguyen  
-Licensed under the MIT license.
+- `timestamp`: the time when the article is saved to the list
+- `updatedOn`: the time when the article is last updated
