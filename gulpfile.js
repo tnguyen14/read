@@ -16,6 +16,7 @@ var watchify = require('watchify');
 var xtend = require('xtend');
 var source = require('vinyl-source-stream');
 var hbsfy = require('hbsfy');
+var aliasify = require('aliasify');
 gulp.task('scripts', function () {
 	var opts = {
 		entries: './js/app.js',
@@ -31,6 +32,7 @@ gulp.task('scripts', function () {
 	}
 	// optionally transform
 	bundler.transform(hbsfy);
+	bundler.transform(aliasify);
 
 	bundler.on('update', function (ids) {
 		gutil.log('File(s) changed: ' + gutil.colors.cyan(ids));

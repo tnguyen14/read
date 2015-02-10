@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/tnguyen14/read",
   "devDependencies": {
+    "aliasify": "^1.5.1",
     "browserify": "^8.1.1",
     "gulp": "^3.8.10",
     "gulp-autoprefixer": "^2.1.0",
@@ -41,5 +42,10 @@
     "ampersand-view": "^7.2.0",
     "handlebars": "^2.0.0",
     "xhr": "^2.0.1"
+  },
+  "aliasify": {
+    "aliases": {
+      "config": "./config.json"
+    }
   }
 }

@@ -2,6 +2,7 @@
 
 var InputView = require('ampersand-input-view');
 var xhr = require('xhr');
+var config = require('config');
 
 module.exports = InputView.extend({
 	events: {
@@ -15,7 +16,7 @@ module.exports = InputView.extend({
 		}
 		this.model.url = url;
 		xhr({
-			url: 'http://inspired-read.herokuapp.com/extract/' +  encodeURIComponent(url)
+			url: config.API_URL + 'extract/' +  encodeURIComponent(url)
 		}, function (err, resp, body) {
 			if (err) { return; }
 			if (resp.statusCode !== 200) {
