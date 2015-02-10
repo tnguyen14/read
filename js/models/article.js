@@ -6,6 +6,9 @@ module.exports = Model.extend({
 	props: {
 		url: ['string', true, ''],
 		title: ['string', false, ''],
-		description: 'string'
+		description: 'string',
+		favorite: 'boolean',
+		note: 'string',
+		status: 'string'
 	}
 });
