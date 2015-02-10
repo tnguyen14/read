@@ -74,6 +74,7 @@ gulp.task('styles', function () {
 var connect = require('gulp-connect');
 gulp.task('connect', function () {
 	return connect.server({
+		root: ['./', './dist'],
 		port: 4005
 	});
 });
