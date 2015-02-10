@@ -55,7 +55,7 @@ var sass = require('gulp-sass');
 var prefix = require('gulp-autoprefixer');
 var csso = require('gulp-csso');
 gulp.task('styles', function () {
-    return gulp.src('scss/**/*.scss')
+	return gulp.src('scss/**/*.scss')
 		.pipe(plumber({
 			errorHandler: function (err) {
 				gutil.log(gutil.colors.red('Styles error:\n' + err.message));
@@ -80,4 +80,10 @@ gulp.task('connect', function () {
 
 gulp.task('watch', ['enable-watch-mode', 'scripts', 'styles', 'connect'], function () {
 	gulp.watch('scss/**/*.scss', ['styles']);
+});
+
+var ghPages = require('gulp-gh-pages');
+gulp.task('deploy', ['scripts', 'styles'], function () {
+	return gulp.src(['dist/**/*', '*.html'])
+		.pipe(ghPages());
 });
