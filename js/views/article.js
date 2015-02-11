@@ -4,5 +4,8 @@ var View = require('ampersand-view');
 var template = require('../../templates/article.hbs');
 
 module.exports = View.extend({
-	template: template
+	template: template,
+	render: function () {
+		this.renderWithTemplate(this.model);
+	}
 });

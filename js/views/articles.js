@@ -8,6 +8,8 @@ module.exports = View.extend({
 	template: template,
 	render: function () {
 		this.renderWithTemplate();
-		this.renderCollection(this.collection, ArticleView);
+		this.collection.fetch().then(function () {
+			this.renderCollection(this.collection, ArticleView);
+		}.bind(this));
 	}
 });
