@@ -29,6 +29,9 @@ module.exports = View.extend({
 			el: this.query('.articles')
 		});
 		this.renderSubview(this.articles);
+		this.listenTo(this.save, 'newarticle', function (article) {
+			this.articles.collection.create(article, {wait: true})
+		}.bind(this));
 		return this;
 	}
 });

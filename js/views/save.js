@@ -38,6 +38,9 @@ var DescriptionView = InputView.extend({
 });
 
 module.exports = FormView.extend({
+	submitCallback: function (obj) {
+		this.trigger('newarticle', obj);
+	},
 	fields: function () {
 		return [
 			new UrlView({
@@ -59,6 +62,12 @@ module.exports = FormView.extend({
 				type: 'textarea',
 				parent: this,
 				model: this.model
+			}),
+			new InputView({
+				name: 'type',
+				type: 'hidden',
+				value: 'personal',
+				parent: this
 			})
 		];
 	}
