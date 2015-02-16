@@ -44,7 +44,7 @@ module.exports = FormView.extend({
 	fields: function () {
 		return [
 			new UrlView({
-				name: 'url',
+				name: 'link',
 				label: 'Link URL',
 				placeholder: 'http://www.coolstuff.com',
 				parent: this,

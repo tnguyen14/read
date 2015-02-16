@@ -5,7 +5,6 @@ var template = require('../../templates/main.hbs');
 var SaveFormView = require('./save');
 var ArticlesView = require('./articles');
 var ArticleModel = require('../models/article');
-var InputView = require('ampersand-input-view');
 var Collection = require('ampersand-rest-collection');
 var config = require('config');
 var sync = require('ampersand-sync-with-promise');
