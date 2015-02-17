@@ -1,0 +1,44 @@
+// Palette http://www.materialpalette.com/indigo/orange
+$darkPrimaryColor:   #303F9F;
+$primaryColor:       #3F51B5;
+$lightPrimaryColor:  #C5CAE9;
+$textPrimaryColor:   #FFFFFF;
+$accentColor:        #FF9800;
+$primaryTextColor:   #212121;
+$secondaryTextColor: #727272;
+$dividerColor:       #B6B6B6;
+
+
+// UI elements
+%card {
+	background-color: #fff;
+	box-shadow: 0px 2px 5px 0px rgba(0,0,0,.16), 0px 2px 5px 0px rgba(0,0,0,.23);
+	padding: 1em;
+	@media (min-width: 37.5em) {
+		padding: 2em;
+	}
+	.title {
+		font-weight: 300;
+		margin-top: 0;
+	}
+}
+
+%button {
+	background-color: $accentColor;
+	border: none;
+	border-radius: 2px;
+	color: $textPrimaryColor;
+	cursor: pointer;
+	padding: 1em;
+	&:hover {
+		background-color: darken($accentColor, 5%);
+	}
+}
+
+%clearfix {
+	&:after {
+		content: "";
+		display: table;
+		clear: both;
+	}
+}
