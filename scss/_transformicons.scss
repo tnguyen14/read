@@ -1,0 +1,141 @@
+$tcon-size: 40px !default;
+$tcon-transition: .3s !default;
+$tcon-jstransform: 'tcon-transform' !default;
+$tcon-plus-bg: transparent !default;
+$tcon-circle-radius: 80% !default;
+$tcon-plus-radius: ($tcon-size / 8) !default;
+$tcon-plus-color: black !default;
+.tcon {
+  appearance: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: $tcon-size;
+  transition: $tcon-transition;
+  user-select: none;
+  width: $tcon-size;
+  background: transparent;
+
+  > * {
+    display: block;
+  }
+
+  &:focus {
+    outline: none; // see issue #36 https://github.com/grayghostvisuals/transformicons/issues/36
+  }
+}
+.tcon-plus {
+  height: $tcon-size;
+  position: relative;
+  transform: scale(.75);
+  width: $tcon-size;
+
+  &::before,
+  &::after {
+    content: "";
+    border-radius: 2px;
+    display: block;
+    width: 34px;
+    height: 10px;
+    margin: -5px 0 0 -17px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transition: $tcon-transition;
+    background: black;
+  }
+
+  &:after {
+    transform: rotate(90deg);
+  }
+}
+.tcon-plus--minus {
+  &.#{$tcon-jstransform} {
+    &:before {
+      transform: rotate(180deg) translate(0px, 0);
+      width:19px;
+    }
+
+    &:after {
+      transform: rotate(-180deg) translate(-15px, 0);
+      width:19px;
+    }
+  }
+}
+// see issue #7 https://github.com/grayghostvisuals/transformicons/issues/7#issuecomment-59813596
+.tcon-visuallyhidden {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+
+  &:active,
+  &:focus {
+    clip: auto;
+    height: auto;
+    margin: 0;
+    overflow: visible;
+    position: static;
+    width: auto;
+  }
+}
+$spinner_speed: .675s !default;
+$spinner_radius: 80% !default;
+$spinner_fill_radius: 90px !default;
+
+$spinner_size: 40px !default;
+$spinner_thickness: 10px !default;
+$spinner_inner_circle: $spinner_size - $spinner_thickness !default;
+
+$spinner_color: black !default;
+$spinner_bg: lightgray !default;
+$spinner_inner_bg: white !default;
+.tcon-loader--spinner360 {
+  border-radius: 80%;
+  display: block;
+  height: $spinner_size;
+  width: $spinner_size;
+  position: relative;
+  animation: tcon-spin360 $spinner_speed linear infinite forwards;
+  background: $spinner_bg;
+
+  &:before,
+  &:after {
+    content: "";
+    display: block;
+    position: absolute;
+  }
+
+  &:before {
+    border-radius: 0 $spinner_fill_radius $spinner_fill_radius 0;
+    height: $spinner_size;
+    width: 50%;
+    top: 0; right: 0;
+    z-index: 1;
+    background: $spinner_color;
+    background-image: linear-gradient($spinner_bg, $spinner_color);
+  }
+
+  &:after {
+    border-radius: $spinner_radius;
+    height: $spinner_inner_circle;
+    width: $spinner_inner_circle;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    background: $spinner_inner_bg;
+  }
+}
+
+@keyframes tcon-spin360 {
+  to {
+    transform: rotate(360deg);
+  }
+}
