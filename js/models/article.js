@@ -4,7 +4,12 @@ var Model = require('ampersand-model');
 
 module.exports = Model.extend({
 	props: {
-		link: ['string', true, ''],
+		link: {
+			type: 'string',
+			required: true,
+			default: '',
+			allowNull: true
+		},
 		title: ['string', false, ''],
 		description: 'string',
 		favorite: 'boolean',
