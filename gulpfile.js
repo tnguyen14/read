@@ -85,6 +85,8 @@ gulp.task('watch', ['enable-watch-mode', 'scripts', 'styles', 'connect'], functi
 	gulp.watch('scss/**/*.scss', ['styles']);
 });
 
+gulp.task('default', ['watch']);
+
 var ghPages = require('gulp-gh-pages');
 gulp.task('deploy', ['scripts', 'styles'], function () {
 	return gulp.src(['dist/**/*', '*.html'])
