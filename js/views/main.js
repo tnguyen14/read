@@ -29,7 +29,13 @@ module.exports = View.extend({
 		});
 		this.renderSubview(this.articles);
 		this.listenTo(this.save, 'newarticle', function (article) {
-			this.articles.collection.create(article, {wait: true})
+			this.articles.collection.create(article, {
+				wait: true,
+				success: function () {
+					this.save.clear();
+					// @TODO handle notification
+				}.bind(this)
+			});
 		}.bind(this));
 		return this;
 	}

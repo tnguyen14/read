@@ -38,8 +38,8 @@
   },
   "dependencies": {
     "amp-extend": "^1.0.1",
-    "ampersand-form-view": "^2.2.0",
-    "ampersand-input-view": "^3.1.1",
+    "ampersand-form-view": "^3.1.1",
+    "ampersand-input-view": "^4.0.5",
     "ampersand-model": "^4.0.3",
     "ampersand-rest-collection": "^2.0.4",
     "ampersand-sync-with-promise": "^2.1.0",
