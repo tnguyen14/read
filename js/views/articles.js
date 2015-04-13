@@ -14,6 +14,9 @@ module.exports = View.extend({
 		this.collection.fetch().then(function () {
 			this.renderCollection(this.collection, ArticleView);
 			this.loader.remove();
+		}.bind(this), function () {
+			this.el.appendChild(document.createTextNode('Unable to fetch articles at this time.'));
+			this.loader.remove();
 		}.bind(this));
 	}
 });
