@@ -10,7 +10,7 @@ module.exports = Model.extend({
 			default: '',
 			allowNull: true
 		},
-		title: ['string', false, ''],
+		title: 'string',
 		description: 'string',
 		favorite: 'boolean',
 		note: 'string',
