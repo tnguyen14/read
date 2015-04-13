@@ -94,6 +94,6 @@ gulp.task('default', ['watch']);
 
 var ghPages = require('gulp-gh-pages');
 gulp.task('deploy', ['scripts', 'styles'], function () {
-	return gulp.src(['dist/**/*', '*.html'])
+	return gulp.src(['dist/**/*', '*.html', 'manifest.json'])
 		.pipe(ghPages());
 });
