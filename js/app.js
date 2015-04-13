@@ -8,4 +8,4 @@ var main = new MainView({
 });
 main.render();
 
-transformicons.add('.tcon');
+// transformicons.add('.tcon');

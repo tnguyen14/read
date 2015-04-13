@@ -17,16 +17,22 @@ $tcon-plus-color: black !default;
   user-select: none;
   width: $tcon-size;
   background: transparent;
+  outline: none;
 
   > * {
     display: block;
   }
 
+  &:hover,
   &:focus {
     outline: none; // see issue #36 https://github.com/grayghostvisuals/transformicons/issues/36
   }
+  &::-moz-focus-inner {
+    border: 0;
+  }
 }
-.tcon-plus {
+
+.tcon-remove {
   height: $tcon-size;
   position: relative;
   transform: scale(.75);
@@ -35,8 +41,8 @@ $tcon-plus-color: black !default;
   &::before,
   &::after {
     content: "";
-    border-radius: 2px;
     display: block;
+    border-radius: 2px;
     width: 34px;
     height: 10px;
     margin: -5px 0 0 -17px;
@@ -47,23 +53,29 @@ $tcon-plus-color: black !default;
     background: black;
   }
 
+  &:before {
+    transform: rotate(45deg);
+  }
+
   &:after {
-    transform: rotate(90deg);
+    transform: rotate(-45deg);
   }
 }
-.tcon-plus--minus {
+
+.tcon-remove--check {
   &.#{$tcon-jstransform} {
     &:before {
-      transform: rotate(180deg) translate(0px, 0);
-      width:19px;
+      transform: rotate(-135deg) translate(0px, -4px);
+      width: 22px;
     }
 
     &:after {
-      transform: rotate(-180deg) translate(-15px, 0);
-      width:19px;
+      transform: rotate(-45deg) translate(4px, 4px);
+      width: 34px;
     }
   }
 }
+
 // see issue #7 https://github.com/grayghostvisuals/transformicons/issues/7#issuecomment-59813596
 .tcon-visuallyhidden {
   border: 0;
