@@ -15,12 +15,14 @@ var browserify = require('browserify');
 var watchify = require('watchify');
 var xtend = require('xtend');
 var source = require('vinyl-source-stream');
+var buffer = require('vinyl-buffer');
 var hbsfy = require('hbsfy');
 var aliasify = require('aliasify');
+var sourcemaps = require('gulp-sourcemaps');
 gulp.task('scripts', function () {
 	var opts = {
 		entries: './js/app.js',
-		debug: (gutil.env.type === 'development'),
+		debug: (gutil.env.debug),
 		extensions: ['.hbs']
 	}
 	if (watching) {
@@ -47,6 +49,9 @@ gulp.task('scripts', function () {
 				 gutil.log(gutil.colors.red('Browserify ' + e));
 			})
 			.pipe(source('main.js'))
+			.pipe(buffer())
+			.pipe(sourcemaps.init({loadMaps: true}))
+			.pipe(sourcemaps.write('./'))
 			.pipe(gulp.dest('dist'));
 	}
 	return rebundle();
