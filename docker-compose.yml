@@ -4,6 +4,7 @@ forms:
    - "13042:3000"
   links:
    - db:mongodb
+  env_file: .env
 
 db:
   image: mongo
