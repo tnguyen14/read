@@ -1,0 +1,11 @@
+forms:
+  image: node:onbuild
+  ports:
+   - "13042:3000"
+  links:
+   - db:mongodb
+
+db:
+  image: mongo
+  volumes:
+   - ./data/db:/data/db
