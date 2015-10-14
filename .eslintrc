@@ -1,0 +1,10 @@
+{
+  "extends": "defaults/configurations/walmart/es5-node",
+  "env": {
+    "browser": true
+  },
+  "rules": {
+    "quotes": [2, "single"],
+    "indent": [2, "tab"]
+  }
+}
