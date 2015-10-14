@@ -29,7 +29,8 @@ $dividerColor:       #B6B6B6;
 	border-radius: 2px;
 	color: $textPrimaryColor;
 	cursor: pointer;
-	padding: 1em;
+	font-size: 1rem;
+	padding: .5em .75em;
 	&:hover {
 		background-color: darken($accentColor, 5%);
 	}
