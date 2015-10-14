@@ -1,4 +1,4 @@
-forms:
+read:
   build: .
   ports:
    - "13042:3000"
