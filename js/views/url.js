@@ -16,7 +16,7 @@ module.exports = InputView.extend({
 		}
 		this.model.url = url;
 		xhr({
-			url: config.API_URL + 'extract/' +  encodeURIComponent(url)
+			url: config.API_URL + 'extract?url=' +  encodeURIComponent(url)
 		}, function (err, resp, body) {
 			if (err) {
 				self.serverError = 'Unable to contact the server at this time. Please try again later.';
@@ -29,7 +29,7 @@ module.exports = InputView.extend({
 				// '{"message":"{\"error_code\": 400, \"error_message\": \"Invalid URL: www\", \"type\": \"error\"}"}'
 				try {
 					self.serverError += JSON.parse(JSON.parse(body).message).error_message;
-				} catch (err) {
+				} catch (e) {
 					self.serverError += body;
 				}
 				self.trigger('change:inputValue');
@@ -44,15 +44,15 @@ module.exports = InputView.extend({
 			var data;
 			try {
 				data = JSON.parse(body);
-			} catch (err) {
-				self.parseError = 'Unable to parse the response, please enter the data manually.\n' + err;
+			} catch (e) {
+				self.parseError = 'Unable to parse the response, please enter the data manually.\n' + e;
 			}
 			self.model.title = data.title;
 			self.model.description = data.description;
 		});
 	},
 	tests: [
-		function (value) {
+		function () {
 			if (this.serverError) {
 				return this.serverError;
 			}

@@ -23,7 +23,6 @@ var TitleView = InputView.extend({
 
 var DescriptionView = InputView.extend({
 	initialize: function () {
-		var self = this;
 		this.listenTo(this.model, 'change:description', function (model, desc) {
 			this.setValue(desc);
 		});
