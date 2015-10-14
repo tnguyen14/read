@@ -6,3 +6,4 @@ var template = require('../../templates/loader.hbs');
 module.exports = View.extend({
 	template: template
 });
+

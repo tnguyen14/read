@@ -16,20 +16,22 @@ module.exports = InputView.extend({
 		}
 		this.model.url = url;
 		xhr({
-			url: config.API_URL + 'extract?url=' +  encodeURIComponent(url)
-		}, function (err, resp, body) {
+			url: config.API_URL + 'extract?url=' + encodeURIComponent(url)
+		}, function (err, resp, body) { // eslint-disable-line max-statements
 			if (err) {
 				self.serverError = 'Unable to contact the server at this time. Please try again later.';
 				self.trigger('change:inputValue');
 				return;
 			}
 			if (resp.statusCode !== 200) {
-				self.serverError = 'Unable to extract information from the URL. Please enter the data manually.\n';
+				self.serverError = 'Unable to extract information from the URL. ' +
+					'Please enter the data manually.\n';
 				// example body response
-				// '{"message":"{\"error_code\": 400, \"error_message\": \"Invalid URL: www\", \"type\": \"error\"}"}'
+				// '{"message":"{\"error_code\": 400, \"error_message\": \"Invalid URL: www\",
+				//  \"type\": \"error\"}"}'
 				try {
 					self.serverError += JSON.parse(JSON.parse(body).message).error_message;
-				} catch (e) {
+				} catch (error) {
 					self.serverError += body;
 				}
 				self.trigger('change:inputValue');
@@ -38,27 +40,28 @@ module.exports = InputView.extend({
 				self.model.description = ' ';
 				return;
 			} else {
-				self.serverError = '';
 				self.trigger('change:inputValue');
 			}
 			var data;
 			try {
 				data = JSON.parse(body);
-			} catch (e) {
-				self.parseError = 'Unable to parse the response, please enter the data manually.\n' + e;
+				self.model.title = data.title;
+				self.model.description = data.description;
+			} catch (error) {
+				self.parseError = 'Unable to parse the response, please enter the data manually.\n' + error;
 			}
-			self.model.title = data.title;
-			self.model.description = data.description;
 		});
 	},
 	tests: [
 		function () {
+			/* eslint-disable no-invalid-this */
 			if (this.serverError) {
 				return this.serverError;
 			}
 			if (this.parseError) {
 				return this.parseError;
 			}
+			/* eslint-enable no-invalid-this */
 		}
 	]
 });

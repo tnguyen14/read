@@ -8,8 +8,9 @@ var UrlView = require('./url');
 
 var TitleView = InputView.extend({
 	initialize: function () {
+		var self = this;
 		this.listenTo(this.model, 'change:title', function (model, title) {
-			this.setValue(title);
+			self.setValue(title);
 		});
 	},
 	bindings: extend({}, InputView.prototype.bindings, {
@@ -23,8 +24,9 @@ var TitleView = InputView.extend({
 
 var DescriptionView = InputView.extend({
 	initialize: function () {
+		var self = this;
 		this.listenTo(this.model, 'change:description', function (model, desc) {
-			this.setValue(desc);
+			self.setValue(desc);
 		});
 	},
 	bindings: extend({}, InputView.prototype.bindings, {
