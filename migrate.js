@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-var backup = require('./backup.json');
+var backup = require('./data/backup.json');
 var db = require('level')('./data', {valueEncoding: 'json'});
 var moment = require('moment-timezone');
 
