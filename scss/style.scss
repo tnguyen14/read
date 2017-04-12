@@ -56,6 +56,21 @@ h1 {
 	margin-top: 2rem;
 }
 
+.loader {
+	border-color: rgba(0, 0, 0, 0.2);
+	border-top-color: rgba(0, 0, 0, 1);
+	border-radius: 100%;
+	border-style: solid;
+	border-width: .35rem;
+	height: 3rem;
+	width: 3rem;
+	animation: loading 1s infinite linear;
+}
+@keyframes loading {
+	0%   { transform: rotate(0); }
+	100% { transform: rotate(359.9deg); }
+}
+
 .save {
 	@extend %clearfix;
 	@extend %card;

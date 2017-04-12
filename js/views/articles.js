@@ -2,7 +2,6 @@
 
 var View = require('ampersand-view');
 var ArticleView = require('./article');
-var Loader = require('./loader');
 var template = require('../../templates/articles.hbs');
 var transformicons = require('../lib/transformicons');
 
@@ -10,16 +9,17 @@ module.exports = View.extend({
 	template: template,
 	render: function () {
 		this.renderWithTemplate();
-		this.loader = new Loader().render();
-		this.el.appendChild(this.loader.el);
+		this.loader = document.createElement('div');
+		this.loader.classList.add('loader');
+		this.el.appendChild(this.loader);
 		this.collection.fetch().then(function () {
 			this.renderCollection(this.collection, ArticleView);
-			this.loader.remove();
+			this.el.removeChild(this.loader);
 			// init transformicons
 			transformicons.add('.tcon');
 		}.bind(this), function () {
 			this.el.appendChild(document.createTextNode('Unable to fetch articles at this time.'));
-			this.loader.remove();
+			this.el.removeChild(this.loader);
 		}.bind(this));
 	}
 });
