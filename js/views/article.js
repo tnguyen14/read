@@ -12,8 +12,10 @@ module.exports = View.extend({
 		this.renderWithTemplate(this.model);
 	},
 	removeArticle: function (e) {
-		if (e.target.getAttribute('data-confirm') === 'false') {
-			e.target.setAttribute('data-confirm', 'true');
+		var button = e.delegateTarget;
+		if (button.getAttribute('data-confirm') === 'false') {
+			button.classList.add('confirm');
+			button.setAttribute('data-confirm', 'true');
 			return;
 		}
 		this.model.destroy({

@@ -1,6 +1,3 @@
-$tcon-size: 30px;
-
-@import "transformicons";
 @import "bits";
 
 html {
@@ -115,7 +112,6 @@ h1 {
 }
 
 .articles {
-	align-items: center;
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: space-around;
@@ -148,12 +144,23 @@ h1 {
 		}
 	}
 	.article-remove {
-		opacity: .4;
+		background-color: transparent;
+		border: none;
+		cursor: pointer;
+		opacity: 0;
 		position: absolute;
-		top: 0;
+		bottom: 0;
 		right: 0;
-		&:hover {
-			opacity: 1;
+		&.confirm {
+			color: red;
+		}
+	}
+	&:hover {
+		.article-remove {
+			opacity: .4;
+			&:hover {
+				opacity: 1;
+			}
 		}
 	}
 	.content {
