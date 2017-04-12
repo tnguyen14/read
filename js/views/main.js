@@ -27,9 +27,6 @@ module.exports = View.extend({
 			collection: new ArticlesCollection(),
 			el: this.query('.articles')
 		});
-		this.renderSubview(new View({
-			template: '<h2 class="section-title">Articles</h2>'
-		}));
 		this.renderSubview(this.articles);
 		this.listenTo(this.save, 'newarticle', function (article) {
 			this.articles.collection.create(article, {
