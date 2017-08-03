@@ -4,7 +4,17 @@
   "description": "",
   "main": "index.html",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "js": "browserify -t hbsfy -t aliasify js/app.js -o dist/main.js",
+    "js:watch": "watchify -t hbsfy -t aliasify js/app.js -o dist/main.js",
+    "css": "postcss scss/style.scss -o dist/style.css",
+    "css:watch": "npm run css -- -w",
+    "serve": "http-server dist -p 4005",
+    "clean": "rm -rf dist && mkdir dist",
+    "copy": "cp index.html dist/ && cp manifest.json dist/",
+    "build": "npm run clean && npm run copy && npm run css && npm run js",
+    "watch": "npm run js:watch & npm run css:watch & npm run serve",
+    "start": "npm run build && npm run watch",
+    "deploy": "npm run build && gh-pages -d dist"
   },
   "repository": {
     "type": "git",
@@ -18,26 +28,20 @@
   "homepage": "https://github.com/tnguyen14/read",
   "devDependencies": {
     "aliasify": "^1.5.1",
-    "browserify": "^9.0.8",
+    "browserify": "^14.4.0",
     "eslint": "^1.6.0",
     "eslint-config-defaults": "^7.0.1",
     "eslint-plugin-filenames": "^0.1.2",
-    "gulp": "^3.8.10",
-    "gulp-autoprefixer": "^2.1.0",
-    "gulp-connect": "^2.2.0",
-    "gulp-csso": "^0.2.9",
-    "gulp-gh-pages": "^0.5.0",
-    "gulp-jshint": "^1.9.0",
-    "gulp-plumber": "^1.0.0",
-    "gulp-sass": "^2.0.4",
-    "gulp-sourcemaps": "^1.5.1",
-    "gulp-util": "^3.0.2",
-    "hbsfy": "^2.2.1",
+    "gh-pages": "^1.0.0",
+    "handlebars": "^3.0.3",
+    "hbsfy": "^2.7.0",
+    "http-server": "^0.10.0",
     "jshint-stylish": "^2.0.0",
-    "vinyl-buffer": "^1.0.0",
-    "vinyl-source-stream": "^1.0.0",
-    "watchify": "^3.1.0",
-    "xtend": "^4.0.0"
+    "postcss": "^6.0.8",
+    "postcss-cli": "^4.1.0",
+    "postcss-scss": "^1.0.2",
+    "precss": "^2.0.0",
+    "watchify": "^3.9.0"
   },
   "dependencies": {
     "amp-extend": "^1.0.1",
@@ -47,12 +51,22 @@
     "ampersand-rest-collection": "^2.0.4",
     "ampersand-sync-with-promise": "^2.1.0",
     "ampersand-view": "^8.0.1",
-    "handlebars": "^3.0.1",
     "xhr": "^2.0.1"
   },
   "aliasify": {
     "aliases": {
       "config": "./config.json"
+    }
+  },
+  "postcss": {
+    "parser": "postcss-scss",
+    "plugins": {
+      "precss": {
+        "import": {
+          "prefix": "_",
+          "extension": ".scss"
+        }
+      }
     }
   }
 }
