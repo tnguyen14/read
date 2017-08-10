@@ -15,5 +15,5 @@ script:
   - chmod 600 .travis/muffin
   - eval "$(ssh-agent -s)" # start the ssh agent
   - ssh-add .travis/muffin
-  - git remote add deploy ssh://$deploy_user@$deploy_host/$deploy_uri
+  - git remote add deploy $deploy_user@$deploy_host:$deploy_uri
   - git push deploy master
