@@ -2,10 +2,13 @@ language: node_js
 node_js:
 - '6'
 
+addons:
+  ssh_known_hosts: $deploy_host
+
 script:
   - openssl aes-256-cbc -K $encrypted_539d231ab808_key -iv $encrypted_539d231ab808_iv -in .travis/muffin.enc -out .travis/muffin -d
   - chmod 600 .travis/muffin
   - eval "$(ssh-agent -s)" # start the ssh agent
   - ssh-add .travis/muffin
-  - git remote add muffin $muffin_uri
-  - git push muffin master
+  - git remote add deploy ssh://$deploy_user@$deploy_host/$deploy_uri
+  - git push deploy master
