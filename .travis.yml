@@ -8,4 +8,4 @@ script:
   - eval "$(ssh-agent -s)" # start the ssh agent
   - ssh-add .travis/muffin
   - git remote add muffin $muffin_uri
-  - git push muffin
+  - git push muffin master
