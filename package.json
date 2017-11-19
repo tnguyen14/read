@@ -27,11 +27,10 @@
   },
   "homepage": "https://github.com/tnguyen14/read",
   "devDependencies": {
+    "@google-cloud/datastore": "^1.1.0",
     "aliasify": "^1.5.1",
     "browserify": "^14.4.0",
-    "eslint": "^1.6.0",
-    "eslint-config-defaults": "^7.0.1",
-    "eslint-plugin-filenames": "^0.1.2",
+    "eslint": "^4.11.0",
     "gh-pages": "^1.0.0",
     "handlebars": "^3.0.3",
     "hbsfy": "^2.7.0",
