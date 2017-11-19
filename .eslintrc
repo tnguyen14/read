@@ -1,7 +1,7 @@
 {
-  "extends": "defaults/configurations/walmart/es5-node",
-  "env": {
-    "browser": true
+  "extends": "eslint:recommended",
+  "parserOptions": {
+    "ecmaVersion": 6
   },
   "rules": {
     "quotes": [2, "single"],
