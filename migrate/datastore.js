@@ -26,7 +26,9 @@ r2(`${LEGACY_API_URL}/${LIST_ID}`).json.then(list => {
 			}, (err) => {
 				if (err) {
 					tally.failure++;
+					console.error(err);
 					resolve();
+					return;
 				}
 				tally.success++;
 				resolve();
