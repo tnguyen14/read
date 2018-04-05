@@ -4,13 +4,13 @@
   "description": "",
   "main": "index.html",
   "scripts": {
-    "js": "browserify -t hbsfy -t aliasify js/app.js -o dist/main.js",
-    "js:watch": "watchify -t hbsfy -t aliasify js/app.js -o dist/main.js",
-    "css": "postcss scss/style.scss -o dist/style.css",
+    "js": "browserify -t hbsfy -t aliasify client/js/app.js -o dist/main.js",
+    "js:watch": "watchify -t hbsfy -t aliasify client/js/app.js -o dist/main.js",
+    "css": "postcss client/scss/style.scss -o dist/style.css",
     "css:watch": "npm run css -- -w",
     "serve": "http-server dist -p 4005",
     "clean": "rm -rf dist && mkdir dist",
-    "copy": "cp index.html dist/ && cp manifest.json dist/",
+    "copy": "cp client/index.html dist/ && cp client/manifest.json dist/",
     "build": "npm run clean && npm run copy && npm run css && npm run js",
     "watch": "npm run js:watch & npm run css:watch & npm run serve",
     "start": "npm run build && npm run watch",
@@ -57,7 +57,7 @@
   },
   "aliasify": {
     "aliases": {
-      "config": "./config.json"
+      "config": "./client/config.json"
     }
   },
   "postcss": {
