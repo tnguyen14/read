@@ -16,10 +16,19 @@ var server = restify.createServer({
 	version: '0.1.0'
 });
 
-server.use(restify.CORS());
-server.use(restify.acceptParser(server.acceptable));
-server.use(restify.queryParser());
-server.use(restify.bodyParser());
+const corsMiddleware = require('restify-cors-middleware');
+const cors = corsMiddleware({
+	origins: ['localhost', 'https://api.tridnguyen.com']
+});
+
+server.use(cors.actual);
+server.use(restify.plugins.acceptParser(server.acceptable));
+server.use(restify.plugins.queryParser({
+	mapParams: true
+}));
+server.use(restify.plugins.bodyParser({
+	mapParmas: true
+}));
 
 /* Router */
 require('./router')(server);
