@@ -3,3 +3,6 @@ dist
 .publish
 credentials/*
 .env
+server/node_modules/
+server/data
+server/backup.json

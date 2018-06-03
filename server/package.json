@@ -1,0 +1,31 @@
+{
+  "name": "read-server",
+  "version": "1.0.0",
+  "main": "lib/app.js",
+  "description": "reading list server",
+  "homepage": "https://github.com/tnguyen14/read-server",
+  "bugs": "https://github.com/tnguyen14/read-server/issues",
+  "author": {
+    "name": "Tri Nguyen",
+    "email": "tri@tridnguyen.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tnguyen14/read-server"
+  },
+  "license": "ISC",
+  "keywords": [],
+  "devDependencies": {},
+  "scripts": {
+    "start": "node ./lib/app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "level": "^1.4.0",
+    "lodash": "^2.4.1",
+    "moment-timezone": "^0.2.0",
+    "request": "^2.69.0",
+    "restify": "^2.8.1",
+    "restify-errors": "^4.0.0"
+  }
+}
