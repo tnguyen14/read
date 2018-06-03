@@ -18,7 +18,7 @@ var server = restify.createServer({
 
 const corsMiddleware = require('restify-cors-middleware');
 const cors = corsMiddleware({
-	origins: ['localhost', 'https://api.tridnguyen.com']
+	origins: ['localhost', 'https://tridnguyen.com']
 });
 
 server.use(cors.actual);
