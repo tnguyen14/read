@@ -21,11 +21,12 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "level": "^1.4.0",
-    "lodash": "^2.4.1",
-    "moment-timezone": "^0.2.0",
+    "level": "^4.0.0",
+    "lodash": "^4.17.10",
+    "moment-timezone": "^0.5.17",
     "request": "^2.69.0",
-    "restify": "^2.8.1",
-    "restify-errors": "^4.0.0"
+    "restify": "^7.2.0",
+    "restify-cors-middleware": "^1.1.0",
+    "restify-errors": "^6.1.0"
   }
 }
