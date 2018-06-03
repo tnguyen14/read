@@ -1,5 +1,5 @@
-/node_modules/
+server/node_modules/
 npm-debug.log
-data
+server/data
 .env
 backup.json
