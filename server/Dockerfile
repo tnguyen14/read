@@ -1,4 +1,4 @@
-FROM mhart/alpine-node:6.11
+FROM mhart/alpine-node:8.11
 
 # dependencies needed to build leveldown
 RUN apk add --no-cache python make gcc g++

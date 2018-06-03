@@ -1,9 +1,9 @@
 version: '2'
 services:
-  read:
-    build: .
+  read-server:
+    build: server
     ports:
      - "13042:3000"
     env_file: .env
     volumes:
-     - ./data:/src/data
+     - ./server/data:/src/data
