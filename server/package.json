@@ -22,11 +22,11 @@
   },
   "dependencies": {
     "level": "^4.0.0",
-    "lodash": "^4.17.10",
-    "moment-timezone": "^0.5.17",
-    "request": "^2.69.0",
-    "restify": "^7.2.0",
-    "restify-cors-middleware": "^1.1.0",
-    "restify-errors": "^6.1.0"
+    "lodash": "^4.17.11",
+    "moment-timezone": "^0.5.23",
+    "request": "^2.88.0",
+    "restify": "^7.7.0",
+    "restify-cors-middleware": "^1.1.1",
+    "restify-errors": "^6.1.1"
   }
 }
