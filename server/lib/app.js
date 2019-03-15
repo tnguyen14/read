@@ -1,13 +1,3 @@
-/*
- * read-server
- * https://github.com/tnguyen14/read-server
- *
- * Copyright (c) 2016 Tri Nguyen
- * Licensed under the MIT license.
- */
-
-'use strict';
-
 var restify = require('restify');
 var db = require('./db');
 
@@ -21,6 +11,7 @@ const cors = corsMiddleware({
 	origins: ['localhost', 'https://tridnguyen.com']
 });
 
+server.pre(cors.preflight);
 server.use(cors.actual);
 server.use(restify.plugins.acceptParser(server.acceptable));
 server.use(restify.plugins.queryParser({
