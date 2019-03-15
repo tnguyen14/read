@@ -21,7 +21,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "@google-cloud/firestore": "^1.1.0",
+    "@tridnguyen/firestore": "^1.0.0",
     "dotenv": "^7.0.0",
     "level": "^4.0.0",
     "lodash": "^4.17.11",

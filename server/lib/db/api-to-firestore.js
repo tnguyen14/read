@@ -2,7 +2,7 @@ require('dotenv').config();
 
 const chunk = require('lodash.chunk');
 
-const { firestore } = require('./');
+const firestore = require('@tridnguyen/firestore');
 
 const { getJson } = require('simple-fetch');
 
