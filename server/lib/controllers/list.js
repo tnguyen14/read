@@ -1,62 +1,54 @@
-'use strict';
+const restifyErrors = require('restify-errors');
 
-var db = require('../db');
-var restifyErrors = require('restify-errors');
-var articles = require('./articles');
+const firestore = require('@tridnguyen/firestore');
+// @TODO hard-code user for now, until auth is implemented
+const user = process.env.AUTH0_USER;
 
-var missingListNameError = new restifyErrors.MissingParameterError('List name is required.');
-var noListFoundError = new restifyErrors.ResourceNotFoundError('No such list was found');
+const missingListNameError = new restifyErrors.MissingParameterError('List name is required.');
+const noListFoundError = new restifyErrors.ResourceNotFoundError('No such list was found');
+const conflictNameError = new restifyErrors.ConflictError('A list with the same name already exists.');
 
-exports.showAll = function (params, callback) {
-	var lists = [];
-	db.createReadStream({
-		gte: 'list!',
-		lte: 'list!~'
-	})
-	.on('data', function (list) {
-		lists.push(list);
-	})
-	.on('error', callback)
-	.on('close', function () {
-		callback(null, lists);
-	});
+module.exports.showAll = function (params, callback) {
+	firestore.collection('lists')
+		.where('user', '==', user)
+		.get()
+		.then(listsSnapshot => {
+			callback(null, listsSnapshot.docs.map(listDoc => listDoc.data()));
+		}, callback);
 };
 
-exports.showList = function (params, callback) {
+module.exports.showList = function (params, callback) {
 	if (!params.list) {
 		return callback(missingListNameError);
 	}
-	db.get('list!' + params.list, function (err, list) {
-		if (err) {
-			if (err.message.indexOf('Key not found') !== -1) {
-				callback(noListFoundError);
-			} else {
-				callback(err);
-			}
+	const listRef = firestore.doc(`lists/${user}!${params.list}`);
+	listRef.get().then(listSnapshot => {
+		if (!listSnapshot.exists) {
+			callback(noListFoundError);
 			return;
 		}
-		articles.showAll(params, function (err, articles) {
-			if (err) {
-				return callback(err);
-			}
-			list.articles = articles;
-			callback(null, list);
-		});
-	});
+		// @TODO get articles
+		callback(null, listSnapshot.data());
+	}, callback);
 };
 
-exports.newList = function (params, callback) {
+module.exports.newList = function (params, callback) {
 	if (!params.name) {
 		return callback(missingListNameError);
 	}
-	db.put('list!' + params.name, {
-		tags: []
-	}, function (err) {
-		if (err) {
-			return callback(err);
+	const listRef = firestore.doc(`lists/${user}!${params.name}`);
+	listRef.get().then(listSnapshot => {
+		if (listSnapshot.exists) {
+			return callback(conflictNameError);
 		}
-		callback(null, {
-			created: true
-		});
+		listRef.create({
+			user,
+			id: params.name,
+			tags: []
+		}).then(() => {
+			callback(null, {
+				created: true
+			});
+		}, callback);
 	});
 };

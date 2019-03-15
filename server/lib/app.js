@@ -1,5 +1,5 @@
+require('dotenv').config();
 var restify = require('restify');
-var db = require('./db');
 
 var server = restify.createServer({
 	name: 'inspired-read',
@@ -24,15 +24,6 @@ server.use(restify.plugins.bodyParser({
 /* Router */
 require('./router')(server);
 
-server.listen(3000, function () {
+server.listen(process.env.PORT || 3000, function () {
 	console.log('%s listening at %s', server.name, server.url);
 });
-
-function closeServer () {
-	db.close(function () {
-		server.close();
-		process.exit();
-	});
-}
-
-process.on('SIGINT', closeServer).on('SIGTERM', closeServer);
