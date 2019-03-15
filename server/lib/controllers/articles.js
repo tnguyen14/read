@@ -5,51 +5,56 @@ var _ = require('lodash');
 var moment = require('moment-timezone');
 var restifyErrors = require('restify-errors');
 
-var missingListNameError = new restifyErrors.MissingParameterError('List name is required.');
+// @TODO remove when implementing auth
+const user = process.env.AUTH0_USER;
 
-exports.showAll = function (params, callback) {
+const firestore = require('@tridnguyen/firestore');
+const missingListNameError = new restifyErrors.MissingParameterError('List name is required.');
+
+module.exports.showAll = function (params, callback) {
 	if (!params.list) {
 		return callback(missingListNameError);
 	}
-	var after = params.after ? moment(params.after).valueOf() : '';
-	var before = params.before ? moment(params.before).valueOf() : '';
-	var articles = [];
-	db.createReadStream({
-		gte: 'article!' + params.list + '!' + after,
-		lte: 'article!' + params.list + '!' + before + '~'
-	})
-	.on('data', function (article) {
-		// pass back the id, which is the timestamp of the article
-		// remove all other database prefixes
-		articles = [Object.assign({}, article.value, {id: article.key.split('!').pop()})].concat(articles);
-	})
-	.on('error', callback)
-	.on('close', function () {
-		callback(null, articles);
-	});
+	const after = params.after ? Number(params.after) : new Date(0).valueOf();
+	const before = params.before ? Number(params.before) :  Date.now();
+	const limit = Number(params.limit) || 1000;
+	const order = params.order || 'desc';
+
+	const articlesRef = firestore.doc(`lists/${user}!${params.list}`).collection('articles');
+
+	articlesRef
+		.where('id', '>', String(after))
+		.where('id', '<', String(before))
+		.orderBy('id', order)
+		.limit(limit)
+		.get()
+		.then(articlesSnapshot => {
+			callback(null, articlesSnapshot.docs.map(articleSnapshot => articleSnapshot.data()))
+		}, callback);
 };
 
-exports.newArticle = function (params, callback) {
+module.exports.newArticle = function (params, callback) {
 	if (!params.list) {
 		return callback(missingListNameError);
 	}
 	var id = String(Date.now());
-	db.put('article!' + params.list + '!' + id, {
-		link: params.link,
-		title: params.title,
-		description: params.description,
-		favorite: !!params.favorite,
-		note: params.note || '',
-		status: params.status || 'READ'
-	}, function (err) {
-		if (err) {
-			return callback(err);
-		}
-		callback(null, {
-			created: true,
-			id: id
-		});
-	});
+	firestore.doc(`lists/${user}!${params.list}`).collection('articles')
+		.doc(id)
+		.set({
+			link: params.link,
+			title: params.title,
+			description: params.description,
+			favorite: !!params.favorite,
+			note: params.note || '',
+			status: params.status || 'READ'
+		})
+		.then(() => {
+			console.log(`Created article ${params.title} at ${params.link} with id ${id}`);
+			callback(null, {
+				created: true,
+				id
+			});
+		}, callback);
 };
 
 exports.updateArticle = function (params, callback) {
