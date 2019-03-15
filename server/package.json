@@ -15,10 +15,13 @@
   },
   "license": "ISC",
   "keywords": [],
-  "devDependencies": {},
+  "devDependencies": {
+    "nodemon": "^1.18.10"
+  },
   "scripts": {
-    "start": "node ./lib/app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon ./lib/app.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server": "node ./lib/app.js"
   },
   "dependencies": {
     "@tridnguyen/firestore": "^1.0.0",
