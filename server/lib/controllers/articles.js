@@ -10,6 +10,7 @@ const user = process.env.AUTH0_USER;
 
 const firestore = require('@tridnguyen/firestore');
 const missingListNameError = new restifyErrors.MissingParameterError('List name is required.');
+const noArticleFoundError = new restifyErrors.ResourceNotFoundError('No such article was found');
 
 module.exports.showAll = function (params, callback) {
 	if (!params.list) {
@@ -56,6 +57,21 @@ module.exports.newArticle = function (params, callback) {
 			});
 		}, callback);
 };
+
+module.exports.showOne = function (params, callback) {
+	if (!params.list) {
+		return callback(missingListNameError);
+	}
+	const articleRef = firestore.doc(`lists/${user}!${params.list}`).collection('articles').doc(params.id);
+
+	articleRef.get().then(articleSnapshot => {
+		if (!articleSnapshot.exists) {
+			callback(noArticleFoundError);
+			return;
+		}
+		callback(null, articleSnapshot.data());
+	}, callback);
+}
 
 exports.updateArticle = function (params, callback) {
 	if (!params.list) {

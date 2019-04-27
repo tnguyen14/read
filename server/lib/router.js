@@ -29,6 +29,7 @@ module.exports = function router (server) {
 	// articles routes
 	server.get('/:list/articles', route(articles.showAll));
 	server.post('/:list/articles', route(articles.newArticle));
+	server.get('/:list/articles/:id', route(articles.showOne));
 	server.patch('/:list/articles/:id', route(articles.updateArticle));
 	server.del('/:list/articles/:id', route(articles.deleteArticle));
 };
