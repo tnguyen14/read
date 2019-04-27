@@ -13,7 +13,7 @@ module.exports.showAll = function () {
 		.where('user', '==', user)
 		.get()
 		.then(listsSnapshot => {
-			listsSnapshot.docs.map(listDoc => listDoc.data());
+			return listsSnapshot.docs.map(listDoc => listDoc.data());
 		});
 };
 
