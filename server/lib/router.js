@@ -6,14 +6,14 @@ var extract = require('./controllers/extract');
 
 function route (controller) {
 	return function (req, res, next) {
-		controller(req.params, function (err, result) {
-			if (err) {
+		controller(req.params)
+			.then(result => {
+				res.json(result);
+				next();
+			}, err => {
 				console.error(err);
-				return next(err);
-			}
-			res.json(result);
-			return next();
-		});
+				next(err);
+			});
 	};
 }
 
@@ -29,6 +29,7 @@ module.exports = function router (server) {
 	// articles routes
 	server.get('/:list/articles', route(articles.showAll));
 	server.post('/:list/articles', route(articles.newArticle));
+	server.get('/:list/articles/:id', route(articles.showOne));
 	server.patch('/:list/articles/:id', route(articles.updateArticle));
 	server.del('/:list/articles/:id', route(articles.deleteArticle));
 };

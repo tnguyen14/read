@@ -15,18 +15,25 @@
   },
   "license": "ISC",
   "keywords": [],
-  "devDependencies": {},
+  "devDependencies": {
+    "nodemon": "^1.18.10"
+  },
   "scripts": {
-    "start": "node ./lib/app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon ./lib/app.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server": "node ./lib/app.js"
   },
   "dependencies": {
+    "@tridnguyen/firestore": "^1.0.0",
+    "dotenv": "^7.0.0",
     "level": "^4.0.0",
     "lodash": "^4.17.11",
+    "lodash.chunk": "^4.2.0",
     "moment-timezone": "^0.5.23",
     "request": "^2.88.0",
     "restify": "^7.7.0",
     "restify-cors-middleware": "^1.1.1",
-    "restify-errors": "^6.1.1"
+    "restify-errors": "^6.1.1",
+    "simple-fetch": "^1.5.1"
   }
 }
