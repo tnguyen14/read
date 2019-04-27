@@ -1,8 +1,6 @@
 'use strict';
 
-var db = require('../db');
 var _ = require('lodash');
-var moment = require('moment-timezone');
 var restifyErrors = require('restify-errors');
 
 // @TODO remove when implementing auth
@@ -12,9 +10,9 @@ const firestore = require('@tridnguyen/firestore');
 const missingListNameError = new restifyErrors.MissingParameterError('List name is required.');
 const noArticleFoundError = new restifyErrors.ResourceNotFoundError('No such article was found');
 
-module.exports.showAll = function (params, callback) {
+module.exports.showAll = function (params) {
 	if (!params.list) {
-		return callback(missingListNameError);
+		return Promise.reject(missingListNameError);
 	}
 	const after = params.after ? Number(params.after) : new Date(0).valueOf();
 	const before = params.before ? Number(params.before) :  Date.now();
@@ -23,23 +21,23 @@ module.exports.showAll = function (params, callback) {
 
 	const articlesRef = firestore.doc(`lists/${user}!${params.list}`).collection('articles');
 
-	articlesRef
+	return articlesRef
 		.where('id', '>', String(after))
 		.where('id', '<', String(before))
 		.orderBy('id', order)
 		.limit(limit)
 		.get()
 		.then(articlesSnapshot => {
-			callback(null, articlesSnapshot.docs.map(articleSnapshot => articleSnapshot.data()))
-		}, callback);
+			return articlesSnapshot.docs.map(articleSnapshot => articleSnapshot.data());
+		});
 };
 
-module.exports.newArticle = function (params, callback) {
+module.exports.newArticle = function (params) {
 	if (!params.list) {
-		return callback(missingListNameError);
+		return Promise.reject(missingListNameError);
 	}
 	var id = String(Date.now());
-	firestore.doc(`lists/${user}!${params.list}`).collection('articles')
+	return firestore.doc(`lists/${user}!${params.list}`).collection('articles')
 		.doc(id)
 		.set({
 			link: params.link,
@@ -51,31 +49,30 @@ module.exports.newArticle = function (params, callback) {
 		})
 		.then(() => {
 			console.log(`Created article ${params.title} at ${params.link} with id ${id}`);
-			callback(null, {
+			return {
 				created: true,
 				id
-			});
-		}, callback);
+			};
+		});
 };
 
-module.exports.showOne = function (params, callback) {
+module.exports.showOne = function (params) {
 	if (!params.list) {
-		return callback(missingListNameError);
+		return Promise.reject(missingListNameError);
 	}
 	const articleRef = firestore.doc(`lists/${user}!${params.list}`).collection('articles').doc(params.id);
 
-	articleRef.get().then(articleSnapshot => {
+	return articleRef.get().then(articleSnapshot => {
 		if (!articleSnapshot.exists) {
-			callback(noArticleFoundError);
-			return;
+			throw noArticleFoundError;
 		}
-		callback(null, articleSnapshot.data());
-	}, callback);
+		return articleSnapshot.data();
+	});
 }
 
-exports.updateArticle = function (params, callback) {
+exports.updateArticle = function (params) {
 	if (!params.list) {
-		return callback(missingListNameError);
+		return Promise.reject(missingListNameError);
 	}
 	var supportedProperties = [
 		'link',
@@ -86,7 +83,7 @@ exports.updateArticle = function (params, callback) {
 		'status'
 	];
 	const articleRef = firestore.doc(`lists/${user}!${params.list}`).collection('articles').doc(params.id);
-	articleRef.get().then(articleSnapshot => {
+	return articleRef.get().then(articleSnapshot => {
 		if (!articleSnapshot.exists) {
 			throw noArticleFoundError;
 		}
@@ -95,23 +92,23 @@ exports.updateArticle = function (params, callback) {
 			updatedOn: Date.now()
 		});
 		return articleRef.set(updatedArticle);
-	}, callback).then(() => {
-		callback(null, {
+	}).then(() => {
+		return {
 			updated: true
-		});
-	}, callback);
+		};
+	});
 };
 
-exports.deleteArticle = function (params, callback) {
+exports.deleteArticle = function (params) {
 	if (!params.list) {
-		return callback(missingListNameError);
+		return Promise.reject(missingListNameError);
 	}
-	firestore.doc(`lists/${user}!${params.list}`)
+	return firestore.doc(`lists/${user}!${params.list}`)
 		.collection('articles').doc(params.id)
 		.delete()
 		.then(() => {
-			callback(null, {
+			return {
 				deleted: true
-			});
-		}, callback);
+			};
+		});
 };

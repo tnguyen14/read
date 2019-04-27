@@ -3,23 +3,25 @@
 var request = require('request');
 var restifyErrors = require('restify-errors');
 
-function getArticleDetails (params, callback) {
+function getArticleDetails (params) {
 	if (!params.url) {
-		callback(new restifyErrors.MissingParameterError('URL is required'));
+		return Promise.reject(new restifyErrors.MissingParameterError('URL is required'));
 	}
 	var requestUrl = 'https://api.embed.ly/1/extract?';
 	requestUrl += 'key=' + process.env.EMBEDLY_API;
 	requestUrl += '&url=' + encodeURIComponent(params.url);
 	requestUrl += '&format=json';
-	request(requestUrl, function (error, response, body) {
+	return new Promise((resolve, reject) => {
+		request(requestUrl, function (error, response, body) {
 		if (error) {
-			return callback(error);
+			return reject(error);
 		}
 		var result = JSON.parse(body);
 		if (result.type === 'error') {
-			return callback(restifyErrors.makeErrFromCode(result.error_code, result.error_message));
+			return reject(restifyErrors.makeErrFromCode(result.error_code, result.error_message));
 		}
-		callback(null, result);
+		resolve(result);
+	});
 	});
 }
 

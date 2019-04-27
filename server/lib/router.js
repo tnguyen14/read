@@ -6,14 +6,14 @@ var extract = require('./controllers/extract');
 
 function route (controller) {
 	return function (req, res, next) {
-		controller(req.params, function (err, result) {
-			if (err) {
+		controller(req.params)
+			.then(result => {
+				res.json(result);
+				next();
+			}, err => {
 				console.error(err);
-				return next(err);
-			}
-			res.json(result);
-			return next();
-		});
+				next(err);
+			});
 	};
 }
 

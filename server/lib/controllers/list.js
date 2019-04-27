@@ -8,47 +8,46 @@ const missingListNameError = new restifyErrors.MissingParameterError('List name 
 const noListFoundError = new restifyErrors.ResourceNotFoundError('No such list was found');
 const conflictNameError = new restifyErrors.ConflictError('A list with the same name already exists.');
 
-module.exports.showAll = function (params, callback) {
-	firestore.collection('lists')
+module.exports.showAll = function () {
+	return firestore.collection('lists')
 		.where('user', '==', user)
 		.get()
 		.then(listsSnapshot => {
-			callback(null, listsSnapshot.docs.map(listDoc => listDoc.data()));
-		}, callback);
+			listsSnapshot.docs.map(listDoc => listDoc.data());
+		});
 };
 
-module.exports.showList = function (params, callback) {
+module.exports.showList = function (params) {
 	if (!params.list) {
-		return callback(missingListNameError);
+		return Promise.reject(missingListNameError);
 	}
 	const listRef = firestore.doc(`lists/${user}!${params.list}`);
-	listRef.get().then(listSnapshot => {
+	return listRef.get().then(listSnapshot => {
 		if (!listSnapshot.exists) {
-			callback(noListFoundError);
-			return;
+			throw noListFoundError;
 		}
 		// @TODO get articles
-		callback(null, listSnapshot.data());
-	}, callback);
+		return listSnapshot.data();
+	});
 };
 
 module.exports.newList = function (params, callback) {
 	if (!params.name) {
-		return callback(missingListNameError);
+		return Promise.reject(missingListNameError);
 	}
 	const listRef = firestore.doc(`lists/${user}!${params.name}`);
-	listRef.get().then(listSnapshot => {
+	return listRef.get().then(listSnapshot => {
 		if (listSnapshot.exists) {
-			return callback(conflictNameError);
+			throw conflictNameError;
 		}
-		listRef.create({
+		return listRef.create({
 			user,
 			id: params.name,
 			tags: []
 		}).then(() => {
-			callback(null, {
+			return {
 				created: true
-			});
-		}, callback);
+			};
+		});
 	});
 };
