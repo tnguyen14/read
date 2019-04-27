@@ -6,4 +6,4 @@ services:
      - "13042:3000"
     env_file: .env
     volumes:
-     - ./server/data:/src/data
+     - ./server/auth:/src/auth
