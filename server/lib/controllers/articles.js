@@ -106,12 +106,12 @@ exports.deleteArticle = function (params, callback) {
 	if (!params.list) {
 		return callback(missingListNameError);
 	}
-	db.del('article!' + params.list + '!' + params.id, function (err) {
-		if (err) {
-			return callback(err);
-		}
-		callback(null, {
-			deleted: true
-		});
-	});
+	firestore.doc(`lists/${user}!${params.list}`)
+		.collection('articles').doc(params.id)
+		.delete()
+		.then(() => {
+			callback(null, {
+				deleted: true
+			});
+		}, callback);
 };
