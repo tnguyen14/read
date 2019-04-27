@@ -34,7 +34,7 @@ getJson(`${serverUrl}`, {
 				})
 			})
 		);
-	}, err => {
+	}).then(null , err => {
 		console.error(err);
 	});
 
