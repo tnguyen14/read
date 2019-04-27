@@ -34,6 +34,8 @@ getJson(`${serverUrl}`, {
 				})
 			})
 		);
+	}, err => {
+		console.error(err);
 	});
 
 function writeList(list) {
