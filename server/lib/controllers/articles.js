@@ -85,22 +85,21 @@ exports.updateArticle = function (params, callback) {
 		'note',
 		'status'
 	];
-	db.get('article!' + params.list + '!' + params.id, function (err, article) {
-		if (err) {
-			return callback(err);
+	const articleRef = firestore.doc(`lists/${user}!${params.list}`).collection('articles').doc(params.id);
+	articleRef.get().then(articleSnapshot => {
+		if (!articleSnapshot.exists) {
+			throw noArticleFoundError;
 		}
-		var updatedArticle = Object.assign(article, _.pick(params, supportedProperties), {
+		const article = articleSnapshot.data();
+		const updatedArticle = Object.assign(article, _.pick(params, supportedProperties), {
 			updatedOn: Date.now()
 		});
-		db.put('article!' + params.list + '!' + params.id, updatedArticle, function (err) {
-			if (err) {
-				return callback(err);
-			}
-			callback(null, {
-				updated: true
-			});
+		return articleRef.set(updatedArticle);
+	}, callback).then(() => {
+		callback(null, {
+			updated: true
 		});
-	});
+	}, callback);
 };
 
 exports.deleteArticle = function (params, callback) {
