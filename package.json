@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.html",
   "scripts": {
-    "js": "browserify -t hbsfy -t aliasify client/js/app.js -o dist/main.js",
-    "js:watch": "watchify -t hbsfy -t aliasify client/js/app.js -o dist/main.js",
+    "js": "NODE_ENV=production browserify -t hbsfy -t aliasify -g loose-envify client/js/app.js -o dist/main.js",
+    "js:watch": "NODE_ENV=development watchify -t hbsfy -t aliasify -g loose-envify client/js/app.js -o dist/main.js",
     "css": "postcss client/scss/style.scss -o dist/style.css",
     "css:watch": "npm run css -- -w",
     "serve": "http-server dist -p 15003",
@@ -38,6 +38,7 @@
     "hbsfy": "^2.8.1",
     "http-server": "^0.11.1",
     "jshint-stylish": "^2.0.0",
+    "loose-envify": "^1.4.0",
     "postcss": "^6.0.23",
     "postcss-cli": "^6.1.2",
     "postcss-scss": "^1.0.6",

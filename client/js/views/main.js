@@ -10,7 +10,7 @@ var config = require('config');
 var sync = require('ampersand-sync-with-promise');
 var ArticlesCollection = Collection.extend({
 	model: ArticleModel,
-	url: config.API_URL + config.API_COLLECTION + '/articles',
+	url: config.API_URL[process.env.NODE_ENV] + config.API_COLLECTION + '/articles',
 	sync: sync
 });
 

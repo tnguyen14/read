@@ -16,7 +16,7 @@ module.exports = InputView.extend({
 		}
 		this.model.url = url;
 		xhr({
-			url: config.API_URL + 'extract?url=' + encodeURIComponent(url)
+			url: config.API_URL[process.env.NODE_ENV] + 'extract?url=' + encodeURIComponent(url)
 		}, function (err, resp, body) { // eslint-disable-line max-statements
 			if (err) {
 				self.serverError = 'Unable to contact the server at this time. Please try again later.';
