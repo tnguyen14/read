@@ -1,5 +1,5 @@
 require('dotenv').config();
-var restify = require('restify');
+const restify = require('restify');
 
 var server = restify.createServer({
 	name: 'inspired-read',
@@ -25,5 +25,6 @@ server.use(restify.plugins.bodyParser({
 require('./router')(server);
 
 server.listen(process.env.PORT || 3000, function () {
+	// eslint-disable-next-line no-console
 	console.log('%s listening at %s', server.name, server.url);
 });

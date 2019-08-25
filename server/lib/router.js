@@ -1,8 +1,9 @@
 'use strict';
 
-var list = require('./controllers/list');
-var articles = require('./controllers/articles');
-var extract = require('./controllers/extract');
+const list = require('./controllers/list');
+const articles = require('./controllers/articles');
+const extract = require('./controllers/extract');
+const logger = require('./logger');
 
 function route (controller) {
 	return function (req, res, next) {
@@ -11,7 +12,7 @@ function route (controller) {
 				res.json(result);
 				next();
 			}, err => {
-				console.error(err);
+				logger.error(err, req);
 				next(err);
 			});
 	};
