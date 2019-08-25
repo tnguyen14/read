@@ -41,6 +41,8 @@ module.exports.newArticle = function (params) {
 	return firestore.doc(`lists/${user}!${params.list}`).collection('articles')
 		.doc(id)
 		.set({
+			// id is the article timestamp, needed for querying
+			id,
 			link: params.link,
 			title: params.title,
 			description: params.description,
