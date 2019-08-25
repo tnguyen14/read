@@ -34,6 +34,7 @@
     "restify": "^7.7.0",
     "restify-cors-middleware": "^1.1.1",
     "restify-errors": "^6.1.1",
+    "rollbar": "^2.12.2",
     "simple-fetch": "^1.5.1"
   }
 }

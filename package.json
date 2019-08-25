@@ -54,7 +54,6 @@
     "ampersand-rest-collection": "^6.0.0",
     "ampersand-sync-with-promise": "^5.0.1",
     "ampersand-view": "^10.0.3",
-    "rollbar": "^2.12.2",
     "xhr": "^2.5.0"
   },
   "aliasify": {
