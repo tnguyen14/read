@@ -1,7 +1,8 @@
 'use strict';
 
-var _ = require('lodash');
-var restifyErrors = require('restify-errors');
+const _ = require('lodash');
+const restifyErrors = require('restify-errors');
+const logger = require('../logger');
 
 // @TODO remove when implementing auth
 const user = process.env.AUTH0_USER;
@@ -48,7 +49,10 @@ module.exports.newArticle = function (params) {
 			status: params.status || 'READ'
 		})
 		.then(() => {
-			console.log(`Created article ${params.title} at ${params.link} with id ${id}`);
+			logger.info('Article created', {article: {
+				...params,
+				id: id
+			}});
 			return {
 				created: true,
 				id
