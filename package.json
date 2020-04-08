@@ -9,7 +9,8 @@
     "serve": "http-server dist -p 15003",
     "clean": "rm -rf dist && mkdir dist",
     "copy": "cp -r static/* dist",
-    "build": "npm run clean && npm run copy && npm run js",
+    "build": "rollup -c",
+    "dev": "rollup -c -w",
     "watch": "npm run js:watch & npm run serve",
     "start": "npm run build && npm run watch",
     "deploy": "npm run build && gh-pages -d dist"
@@ -26,6 +27,8 @@
   "homepage": "https://github.com/tnguyen14/read",
   "devDependencies": {
     "@google-cloud/datastore": "^3.1.2",
+    "@rollup/plugin-commonjs": "^11.0.2",
+    "@rollup/plugin-node-resolve": "^7.1.1",
     "aliasify": "^2.1.0",
     "browserify": "^14.5.0",
     "dotenv": "^4.0.0",
@@ -40,6 +43,10 @@
     "lint-staged": "^10.1.2",
     "loose-envify": "^1.4.0",
     "r2": "^2.0.1",
+    "rollup": "^2.3.4",
+    "rollup-plugin-svelte": "^5.2.1",
+    "rollup-plugin-terser": "^5.3.0",
+    "svelte": "^3.20.1",
     "watchify": "^3.11.1"
   },
   "dependencies": {
