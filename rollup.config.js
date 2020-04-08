@@ -17,7 +17,7 @@ export default {
     svelte({
       dev: !production,
       css: css => {
-        css.write('dist/style.css')
+        css.write('dist/app.css')
       }
     }),
     resolve({

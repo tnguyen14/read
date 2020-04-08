@@ -1,13 +1,21 @@
 {
   "extends": "eslint:recommended",
   "parserOptions": {
-    "ecmaVersion": 2018
+    "ecmaVersion": 2019,
+    "sourceType": "module"
   },
   "env": {
-    "es6": true
+    "es6": true,
+    "browser": true,
+    "node": true
   },
-  "rules": {
-    "quotes": [2, "single"],
-    "indent": [2, "tab"]
-  }
+  "plugins": [
+    "svelte3"
+  ],
+  "overrides": [
+    {
+      "files": ["**/*.svelte"],
+      "processor": "svelte3/svelte3"
+    }
+  ]
 }

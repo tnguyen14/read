@@ -8,9 +8,9 @@
     "js:watch": "NODE_ENV=development watchify -t hbsfy -t aliasify -g loose-envify client/js/app.js -o dist/main.js",
     "serve": "http-server dist -p 15003",
     "clean": "rm -rf dist && mkdir dist",
-    "copy": "cp -r static/* dist",
-    "build": "rollup -c",
-    "dev": "rollup -c -w",
+    "copy": "cp -r client/static/* dist",
+    "build": "npm run clean && npm run copy && rollup -c",
+    "dev": "rollup -c -w -m",
     "watch": "npm run js:watch & npm run serve",
     "start": "npm run build && npm run watch",
     "deploy": "npm run build && gh-pages -d dist"
@@ -32,7 +32,8 @@
     "aliasify": "^2.1.0",
     "browserify": "^14.5.0",
     "dotenv": "^4.0.0",
-    "eslint": "^4.19.1",
+    "eslint": "^6.8.0",
+    "eslint-plugin-svelte3": "^2.7.3",
     "firebase-admin": "^7.1.0",
     "gh-pages": "^1.2.0",
     "handlebars": "^4.1.2",
@@ -64,15 +65,16 @@
       "config": "./client/config.json"
     }
   },
-  "postcss": {
-    "parser": "postcss-scss",
-    "plugins": {
-      "precss": {
-        "import": {
-          "prefix": "_",
-          "extension": ".scss"
-        }
-      }
+  "prettier": {
+    "singleQuote": true,
+    "trailingComma": "none"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
     }
+  },
+  "lint-staged": {
+    "*.js": "eslint --cache --fix"
   }
 }
