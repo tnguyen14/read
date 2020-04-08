@@ -5,20 +5,22 @@ const articles = require('./controllers/articles');
 const extract = require('./controllers/extract');
 const logger = require('./logger');
 
-function route (controller) {
+function route(controller) {
 	return function (req, res, next) {
-		controller(req.params)
-			.then(result => {
+		controller(req.params).then(
+			(result) => {
 				res.json(result);
 				next();
-			}, err => {
+			},
+			(err) => {
 				logger.error(err, req);
 				next(err);
-			});
+			}
+		);
 	};
 }
 
-module.exports = function router (server) {
+module.exports = function router(server) {
 	// extract
 	server.get('/extract', route(extract));
 

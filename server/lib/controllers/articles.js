@@ -8,19 +8,25 @@ const logger = require('../logger');
 const user = process.env.AUTH0_USER;
 
 const firestore = require('@tridnguyen/firestore');
-const missingListNameError = new restifyErrors.MissingParameterError('List name is required.');
-const noArticleFoundError = new restifyErrors.ResourceNotFoundError('No such article was found');
+const missingListNameError = new restifyErrors.MissingParameterError(
+	'List name is required.'
+);
+const noArticleFoundError = new restifyErrors.ResourceNotFoundError(
+	'No such article was found'
+);
 
 module.exports.showAll = function (params) {
 	if (!params.list) {
 		return Promise.reject(missingListNameError);
 	}
 	const after = params.after ? Number(params.after) : new Date(0).valueOf();
-	const before = params.before ? Number(params.before) :  Date.now();
+	const before = params.before ? Number(params.before) : Date.now();
 	const limit = Number(params.limit) || 1000;
 	const order = params.order || 'desc';
 
-	const articlesRef = firestore.doc(`lists/${user}!${params.list}`).collection('articles');
+	const articlesRef = firestore
+		.doc(`lists/${user}!${params.list}`)
+		.collection('articles');
 
 	return articlesRef
 		.where('id', '>', String(after))
@@ -28,8 +34,10 @@ module.exports.showAll = function (params) {
 		.orderBy('id', order)
 		.limit(limit)
 		.get()
-		.then(articlesSnapshot => {
-			return articlesSnapshot.docs.map(articleSnapshot => articleSnapshot.data());
+		.then((articlesSnapshot) => {
+			return articlesSnapshot.docs.map((articleSnapshot) =>
+				articleSnapshot.data()
+			);
 		});
 };
 
@@ -38,7 +46,9 @@ module.exports.newArticle = function (params) {
 		return Promise.reject(missingListNameError);
 	}
 	var id = String(Date.now());
-	return firestore.doc(`lists/${user}!${params.list}`).collection('articles')
+	return firestore
+		.doc(`lists/${user}!${params.list}`)
+		.collection('articles')
 		.doc(id)
 		.set({
 			// id is the article timestamp, needed for querying
@@ -51,10 +61,12 @@ module.exports.newArticle = function (params) {
 			status: params.status || 'READ'
 		})
 		.then(() => {
-			logger.info('Article created', {article: {
-				...params,
-				id: id
-			}});
+			logger.info('Article created', {
+				article: {
+					...params,
+					id: id
+				}
+			});
 			return {
 				created: true,
 				id
@@ -66,15 +78,18 @@ module.exports.showOne = function (params) {
 	if (!params.list) {
 		return Promise.reject(missingListNameError);
 	}
-	const articleRef = firestore.doc(`lists/${user}!${params.list}`).collection('articles').doc(params.id);
+	const articleRef = firestore
+		.doc(`lists/${user}!${params.list}`)
+		.collection('articles')
+		.doc(params.id);
 
-	return articleRef.get().then(articleSnapshot => {
+	return articleRef.get().then((articleSnapshot) => {
 		if (!articleSnapshot.exists) {
 			throw noArticleFoundError;
 		}
 		return articleSnapshot.data();
 	});
-}
+};
 
 exports.updateArticle = function (params) {
 	if (!params.list) {
@@ -88,29 +103,41 @@ exports.updateArticle = function (params) {
 		'note',
 		'status'
 	];
-	const articleRef = firestore.doc(`lists/${user}!${params.list}`).collection('articles').doc(params.id);
-	return articleRef.get().then(articleSnapshot => {
-		if (!articleSnapshot.exists) {
-			throw noArticleFoundError;
-		}
-		const article = articleSnapshot.data();
-		const updatedArticle = Object.assign(article, _.pick(params, supportedProperties), {
-			updatedOn: Date.now()
+	const articleRef = firestore
+		.doc(`lists/${user}!${params.list}`)
+		.collection('articles')
+		.doc(params.id);
+	return articleRef
+		.get()
+		.then((articleSnapshot) => {
+			if (!articleSnapshot.exists) {
+				throw noArticleFoundError;
+			}
+			const article = articleSnapshot.data();
+			const updatedArticle = Object.assign(
+				article,
+				_.pick(params, supportedProperties),
+				{
+					updatedOn: Date.now()
+				}
+			);
+			return articleRef.set(updatedArticle);
+		})
+		.then(() => {
+			return {
+				updated: true
+			};
 		});
-		return articleRef.set(updatedArticle);
-	}).then(() => {
-		return {
-			updated: true
-		};
-	});
 };
 
 exports.deleteArticle = function (params) {
 	if (!params.list) {
 		return Promise.reject(missingListNameError);
 	}
-	return firestore.doc(`lists/${user}!${params.list}`)
-		.collection('articles').doc(params.id)
+	return firestore
+		.doc(`lists/${user}!${params.list}`)
+		.collection('articles')
+		.doc(params.id)
 		.delete()
 		.then(() => {
 			return {

@@ -1,212 +1,215 @@
 :root {
-	--primary-color-dark:   #E64A19;
-	--primary-color:        #FF5722;
-	--primary-color-light:  #FFCCBC;
-	--primary-color-text:   #FFFFFF;
-	--accent-color:         #03A9F4;
-	--primary-text-color:   #212121;
-	--secondary-text-color: #757575;
-	--divider-color:        #BDBDBD;
+  --primary-color-dark: #e64a19;
+  --primary-color: #ff5722;
+  --primary-color-light: #ffccbc;
+  --primary-color-text: #ffffff;
+  --accent-color: #03a9f4;
+  --primary-text-color: #212121;
+  --secondary-text-color: #757575;
+  --divider-color: #bdbdbd;
 }
 
 html {
-	box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 * {
-	box-sizing: inherit;
+  box-sizing: inherit;
 }
 
 .clearfix:after {
-	content: "";
-	display: table;
-	clear: both;
+  content: '';
+  display: table;
+  clear: both;
 }
 
 body {
-	background-color: #f5f5f5;
-	font-family: Roboto, "Open Sans", sans-serif;
-	color: var(--primary-text-color);
+  background-color: #f5f5f5;
+  font-family: Roboto, 'Open Sans', sans-serif;
+  color: var(--primary-text-color);
 }
 
 .main:before {
-	background-color: var(--primary-color);
-	content: '';
-	width: 100%;
-	height: 10em;
-	position: absolute;
-	top: 0;
-	left: 0;
-	z-index: -1;
+  background-color: var(--primary-color);
+  content: '';
+  width: 100%;
+  height: 10em;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
 }
 
 .section-title,
 .save,
 .articles {
-	margin: 0 auto;
-	width: 100%;
+  margin: 0 auto;
+  width: 100%;
 }
 @media (min-width: 37.5em) {
-	.section-title,
-	.save,
-	.articles {
-		width: 80%;
-	}
-
+  .section-title,
+  .save,
+  .articles {
+    width: 80%;
+  }
 }
 
 h1,
 .section-title {
-	padding: .5rem 1rem;
+  padding: 0.5rem 1rem;
 }
 @media (min-width: 37.5em) {
-	h1,
-	.section-title {
-		padding: .75rem 2rem;
-	}
+  h1,
+  .section-title {
+    padding: 0.75rem 2rem;
+  }
 }
 
 h1 {
-	background-color: var(--primary-color-dark);
-	color: var(--primary-color-text);
-	margin: 0;
-	width: 100%;
+  background-color: var(--primary-color-dark);
+  color: var(--primary-color-text);
+  margin: 0;
+  width: 100%;
 }
 
 .loader {
-	border-color: rgba(0, 0, 0, 0.2);
-	border-top-color: rgba(0, 0, 0, 1);
-	border-radius: 100%;
-	border-style: solid;
-	border-width: .35rem;
-	height: 3rem;
-	width: 3rem;
-	animation: loading 1s infinite linear;
+  border-color: rgba(0, 0, 0, 0.2);
+  border-top-color: rgba(0, 0, 0, 1);
+  border-radius: 100%;
+  border-style: solid;
+  border-width: 0.35rem;
+  height: 3rem;
+  width: 3rem;
+  animation: loading 1s infinite linear;
 }
 @keyframes loading {
-	0%   { transform: rotate(0); }
-	100% { transform: rotate(359.9deg); }
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(359.9deg);
+  }
 }
 
 button,
-[type="submit"] {
-	background-color: var(--accent-color);
-	border: none;
-	border-radius: 2px;
-	color: var(--primary-color-text);
-	cursor: pointer;
-	font-size: 1rem;
-	padding: .5em .75em;
-
+[type='submit'] {
+  background-color: var(--accent-color);
+  border: none;
+  border-radius: 2px;
+  color: var(--primary-color-text);
+  cursor: pointer;
+  font-size: 1rem;
+  padding: 0.5em 0.75em;
 }
 
 .save {
-	background-color: #fff;
-	box-shadow: 0px 0px 5px 0px rgba(0,0,0,.16), 0px 0px 5px 0px rgba(0,0,0,.23);
-	border-radius: 0 0 3px 3px;
-	margin: 2rem auto;
+  background-color: #fff;
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.16),
+    0px 0px 5px 0px rgba(0, 0, 0, 0.23);
+  border-radius: 0 0 3px 3px;
+  margin: 2rem auto;
 }
 .save form {
-	padding: 1em;
+  padding: 1em;
 }
 @media (min-width: 37.5em) {
-	.save form {
-		padding: 2em;
-	}
+  .save form {
+    padding: 2em;
+  }
 }
 .save .title {
-	font-weight: 300;
-	margin: 0;
+  font-weight: 300;
+  margin: 0;
 }
 .save fieldset {
-	border: none;
-	margin: 0;
-	padding: 0;
+  border: none;
+  margin: 0;
+  padding: 0;
 }
 .save label {
-	display: block;
-	margin: 2em 0;
+  display: block;
+  margin: 2em 0;
 }
-.save [data-hook="label"] {
-	display: inline-block;
-	width: 25%;
+.save [data-hook='label'] {
+  display: inline-block;
+  width: 25%;
 }
 .save input,
 .save textarea {
-	padding: 1em;
-	vertical-align: middle;
-	width: 75%;
+  padding: 1em;
+  vertical-align: middle;
+  width: 75%;
 }
 .save textarea {
-	height: 7em;
+  height: 7em;
 }
-.save [type="submit"] {
-	@extend %button;
-	float: right;
+.save [type='submit'] {
+  @extend %button;
+  float: right;
 }
 .save .inactive {
-	display: none;
+  display: none;
 }
 
 .articles {
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: space-around;
-	margin-top: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin-top: 1rem;
 }
 .article {
-	background-color: #fff;
-	border: 1px solid var(--divider-color);
-	flex-basis: 100%;
-	height: 15rem;
-	margin: 1rem 0;
-	padding: 1em 1rem;
-	position: relative;
+  background-color: #fff;
+  border: 1px solid var(--divider-color);
+  flex-basis: 100%;
+  height: 15rem;
+  margin: 1rem 0;
+  padding: 1em 1rem;
+  position: relative;
 }
 @media (min-width: 37.5em) {
-	.article {
-		flex-basis: 45%;
-	}
+  .article {
+    flex-basis: 45%;
+  }
 }
 @media (min-width: 65em) {
-	.article {
-		flex-basis: 30%;
-	}
+  .article {
+    flex-basis: 30%;
+  }
 }
 .article .title {
-	font-weight: 600;
-	font-size: .9em;
-	line-height: 1.4;
-	margin: 0 0 .5em 0;
+  font-weight: 600;
+  font-size: 0.9em;
+  line-height: 1.4;
+  margin: 0 0 0.5em 0;
 }
 .save .title a {
-	color: var(--primary-color-dark);
+  color: var(--primary-color-dark);
 }
 .save .title a:hover {
-	color: var(--accent-color);
+  color: var(--accent-color);
 }
 .article-remove {
-	background-color: transparent;
-	border: none;
-	cursor: pointer;
-	opacity: 0;
-	position: absolute;
-	bottom: 0;
-	right: 0;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  opacity: 0;
+  position: absolute;
+  bottom: 0;
+  right: 0;
 }
 .article-remove.confirm {
-	color: red;
+  color: red;
 }
 .article:hover .article-remove {
-	opacity: .4;
+  opacity: 0.4;
 }
 .article:hover .article-remove:hover {
-	opacity: 1;
+  opacity: 1;
 }
 .article .content {
-	height: calc(100% - 1.26em - .45em);
-	overflow: scroll;
+  height: calc(100% - 1.26em - 0.45em);
+  overflow: scroll;
 }
 .article .content p {
-	margin: 0;
+  margin: 0;
 }

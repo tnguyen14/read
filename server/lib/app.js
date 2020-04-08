@@ -8,18 +8,26 @@ var server = restify.createServer({
 
 const corsMiddleware = require('restify-cors-middleware');
 const cors = corsMiddleware({
-	origins: ['localhost', 'https://tridnguyen.com', 'https://home.tridnguyen.com']
+	origins: [
+		'localhost',
+		'https://tridnguyen.com',
+		'https://home.tridnguyen.com'
+	]
 });
 
 server.pre(cors.preflight);
 server.use(cors.actual);
 server.use(restify.plugins.acceptParser(server.acceptable));
-server.use(restify.plugins.queryParser({
-	mapParams: true
-}));
-server.use(restify.plugins.bodyParser({
-	mapParams: true
-}));
+server.use(
+	restify.plugins.queryParser({
+		mapParams: true
+	})
+);
+server.use(
+	restify.plugins.bodyParser({
+		mapParams: true
+	})
+);
 
 /* Router */
 require('./router')(server);

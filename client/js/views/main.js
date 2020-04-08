@@ -10,7 +10,8 @@ var config = require('config');
 var sync = require('ampersand-sync-with-promise');
 var ArticlesCollection = Collection.extend({
 	model: ArticleModel,
-	url: config.API_URL[process.env.NODE_ENV] + config.API_COLLECTION + '/articles',
+	url:
+		config.API_URL[process.env.NODE_ENV] + config.API_COLLECTION + '/articles',
 	sync: sync
 });
 
@@ -28,16 +29,20 @@ module.exports = View.extend({
 			el: this.query('.articles')
 		});
 		this.renderSubview(this.articles);
-		this.listenTo(this.save, 'newarticle', function (article) {
-			this.articles.collection.create(article, {
-				at: 0,
-				wait: true,
-				success: function () {
-					this.save.clear();
-					// @TODO handle notification
-				}.bind(this)
-			});
-		}.bind(this));
+		this.listenTo(
+			this.save,
+			'newarticle',
+			function (article) {
+				this.articles.collection.create(article, {
+					at: 0,
+					wait: true,
+					success: function () {
+						this.save.clear();
+						// @TODO handle notification
+					}.bind(this)
+				});
+			}.bind(this)
+		);
 		return this;
 	}
 });
