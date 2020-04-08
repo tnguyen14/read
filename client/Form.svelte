@@ -19,10 +19,11 @@
   <h2 class="title">Save an article</h2>
   <div class="field">
     <label for="link">Link URL</label>
-    <input type="url" class="form-control"
+    <input type="url" class="has-action"
       placeholder="https://coolstuff.com"
       id="link" name="link" bind:value={url}
 		on:change={extract}/>
+    <button class="input-action" type="button" on:click={extract}><i class="material-icons">get_app</i></button>
   </div>
   <div class="field {title ? '' : 'inactive'}">
     <label for="title">Title</label>
@@ -61,6 +62,15 @@
     padding: 1em;
     vertical-align: middle;
     width: 74%; /* not sure why 75% push the text box down */
+  }
+  input.has-action {
+    width: calc(74% - 3em); /* not sure why 3 is needed instead of 2.8 */
+  }
+  .input-action {
+    background-color: var(--divider-color);
+    padding: 5px;
+    width: 2.8em;
+    height: 2.8em;
   }
   textarea {
     height: 7em;
