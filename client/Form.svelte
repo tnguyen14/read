@@ -1,10 +1,20 @@
+<script>
+  let url;
+  const baseUrl = 'https://read.cloud.tridnguyen.com';
+  async function extract() {
+    const resp = await fetch(`${baseUrl}/extract?url=${encodeURIComponent(url)}`)
+      .then(r => r.json())
+    console.log(resp);
+  }
+</script>
 <form class="clearfix">
   <h2 class="title">Save an article</h2>
   <div class="field">
     <label for="link">Link URL</label>
     <input type="url" class="form-control"
       placeholder="https://coolstuff.com"
-      id="link" name="link" />
+      id="link" name="link" bind:value={url}
+		on:change={extract}/>
   </div>
   <button type="submit">Save</button>
 </form>
