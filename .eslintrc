@@ -9,9 +9,7 @@
     "browser": true,
     "node": true
   },
-  "plugins": [
-    "svelte3"
-  ],
+  "plugins": ["svelte3"],
   "overrides": [
     {
       "files": ["**/*.svelte"],

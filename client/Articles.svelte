@@ -5,18 +5,9 @@
   let articles;
 
   onMount(async () => {
-    articles = await fetch(`${baseUrl}/tri/articles`)
-      .then(r => r.json())
+    articles = await fetch(`${baseUrl}/tri/articles`).then((r) => r.json());
   });
 </script>
-
-{#if articles}
-  <div class="articles">
-  {#each articles as article}
-    <Article {article} />
-  {/each}
-  </div>
-{/if}
 
 <style>
   .articles {
@@ -26,3 +17,11 @@
     margin-top: 1rem;
   }
 </style>
+
+{#if articles}
+  <div class="articles">
+    {#each articles as article}
+      <Article {article} />
+    {/each}
+  </div>
+{/if}

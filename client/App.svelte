@@ -2,13 +2,6 @@
   import Form from './Form.svelte';
   import Articles from './Articles.svelte';
 </script>
-<main>
-  <div class="save">
-    <h1>Read</h1>
-    <Form />
-  </div>
-  <Articles />
-</main>
 
 <style>
   main:before {
@@ -29,3 +22,11 @@
     margin: 2rem auto;
   }
 </style>
+
+<main>
+  <div class="save">
+    <h1>Read</h1>
+    <Form />
+  </div>
+  <Articles />
+</main>

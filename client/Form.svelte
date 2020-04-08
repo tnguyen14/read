@@ -22,8 +22,10 @@
     <input type="url" class="has-action"
       placeholder="https://coolstuff.com"
       id="link" name="link" bind:value={url}
-		on:change={extract}/>
-    <button class="input-action" type="button" on:click={extract}><i class="material-icons">get_app</i></button>
+      on:change={extract}/>
+    <button class="input-action" type="button" on:click={extract}>
+      <i class="material-icons">get_app</i>
+    </button>
   </div>
   <div class="field {title ? '' : 'inactive'}">
     <label for="title">Title</label>
