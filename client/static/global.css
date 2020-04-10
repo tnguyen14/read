@@ -85,7 +85,7 @@ button,
   background-color: var(--accent-color);
   border: none;
   border-radius: 2px;
-  color: var(--primary-color-text);
+  color: var(--primary-text-clor);
   cursor: pointer;
   font-size: 1rem;
   padding: 0.5em 0.75em;

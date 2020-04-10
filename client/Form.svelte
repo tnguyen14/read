@@ -2,7 +2,6 @@
   import { onMount } from 'svelte';
   import { articles } from './stores.js';
   let url, title, description;
-  const baseUrl = 'https://read.cloud.tridnguyen.com';
   let isRetrieving = false;
   async function extract() {
     if (isRetrieving) {
@@ -12,12 +11,19 @@
     isRetrieving = true;
     title = description = 'Retrieving...';
     ({title, description} = await fetch(
-      `${baseUrl}/extract?url=${encodeURIComponent(url)}`)
+      `${API_URL}/extract?url=${encodeURIComponent(url)}`)
       .then(r => r.json()))
+    if (!title) {
+      title = 'Error - no title found';
+    }
+    // allow description to be set manually
+    if (!description) {
+      description = '';
+    }
     isRetrieving = false;
   }
   $: isSubmittable = !isRetrieving && (
-    !!url && !!title && !!description
+    !!url && !!title
   )
 
   async function addArticle(e) {
@@ -30,7 +36,7 @@
       title,
       description
     };
-    const resp = await fetch(`${baseUrl}/tri/articles`, {
+    const resp = await fetch(`${API_URL}/${COLLECTION}/articles`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -46,8 +52,8 @@
     });
     // reset
     url = '';
-    title = '';
-    description = '';
+    title = undefined;
+    description = undefined;
   }
 </script>
 
@@ -63,11 +69,11 @@
       <i class="material-icons">get_app</i>
     </button>
   </div>
-  <div class="field {title ? '' : 'inactive'}">
+  <div class="field {title != undefined ? '' : 'inactive'}">
     <label for="title">Title</label>
     <input name="title" type="text" id="title" bind:value={title}/>
   </div>
-  <div class="field {description ? '' : 'inactive'}">
+  <div class="field {description != undefined ? '' : 'inactive'}">
     <label for="description">Description</label>
     <textarea name="description" id="description" bind:value={description}></textarea>
   </div>

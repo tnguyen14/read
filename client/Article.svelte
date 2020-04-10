@@ -1,16 +1,44 @@
 <script>
+  import { createEventDispatcher } from 'svelte';
+
+  const dispatch = createEventDispatcher();
+
   export let article;
+  let title = 'Click twice to delete article';
+  let deleteClickedOnce = false;
+  async function deleteArticle() {
+    if (!article || !article.id) {
+      console.error('No article to be deleted');
+      return;
+    }
+    if (!deleteClickedOnce) {
+      deleteClickedOnce = true;
+      title = 'Click again to delete article';
+      return;
+    }
+    await fetch(`${API_URL}/${COLLECTION}/articles/${article.id}`, {
+      method: 'DELETE'
+    });
+    dispatch('article:deleted', {
+      id: article.id
+    });
+  }
 </script>
 
 <div class="article">
-	<button type="button" class="article-remove" aria-label="remove article" data-confirm="false">
-		<i class="material-icons">delete</i>
-	</button>
-    <h3 class="title"><a href="{article.link}">
-      {article.title}</a></h3>
-	<div class="content">
-		<p>{article.description}</p>
-	</div>
+  <button type="button" class="article-remove {deleteClickedOnce ? 'confirm' : ''}"
+    title={title} on:click={deleteArticle}
+    aria-label="remove article" data-confirm="false">
+    <i class="material-icons">delete</i>
+  </button>
+  <h3 class="title">
+    <a href="{article.link}">
+      {article.title}
+    </a>
+  </h3>
+  <div class="content">
+    <p>{article.description}</p>
+  </div>
 </div>
 
 <style>
@@ -49,16 +77,16 @@
     background-color: transparent;
     border: none;
     cursor: pointer;
-    opacity: 0;
+    opacity: 0.2;
     position: absolute;
-    bottom: 0;
+    top: 0;
     right: 0;
   }
   .article-remove.confirm {
     color: red;
   }
   .article:hover .article-remove {
-    opacity: 0.4;
+    opacity: 0.6;
   }
   .article:hover .article-remove:hover {
     opacity: 1;
