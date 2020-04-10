@@ -1,7 +1,0 @@
-{
-  "API_URL": {
-    "production": "https://read.cloud.tridnguyen.com/",
-    "development": "https://api.home.tridnguyen.com/read/"
-  },
-  "API_COLLECTION": "tri"
-}
