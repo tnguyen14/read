@@ -6,4 +6,6 @@
 - [ ] Create a dev endpoint with dev-read project
 - [ ] Create a script to migrate DB from prod to dev
 - [x] Migrate from travis to github actions for client deployment
-- [ ] Create github actions for cloud run deployment
+- [x] Create github actions for cloud run deployment
+- [ ] Add edit function (#42)
+- [ ] Add menu item on top right (3 dots) with 2 options, Delete and Edit (#42). This will mean implementing a popup for delete confirmation.
