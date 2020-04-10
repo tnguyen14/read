@@ -65,7 +65,8 @@
       placeholder="https://coolstuff.com"
       id="link" name="link" bind:value={url}
       on:change={extract}/>
-    <button class="input-action" type="button" on:click={extract}>
+    <button class="input-action" type="button" disabled={isRetrieving}
+      on:click={extract}>
       <i class="material-icons">get_app</i>
     </button>
   </div>
@@ -77,7 +78,7 @@
     <label for="description">Description</label>
     <textarea name="description" id="description" bind:value={description}></textarea>
   </div>
-  <input type="submit" disabled={!isSubmittable} 
+  <input type="submit" disabled={!isSubmittable}
          on:click={addArticle} value="Save" />
 </form>
 
