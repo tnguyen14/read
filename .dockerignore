@@ -1,2 +1,7 @@
 node_modules
 server/node_modules
+.github
+dist
+docker-compose.yml
+Dockerfile
+*.md
