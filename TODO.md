@@ -3,8 +3,8 @@
 - [x] Clear out the form on successfully creation
 - [x] Delete article functionality
 - [x] Delete old code
-- [ ] Create a dev endpoint with dev-read project
-- [ ] Create a script to migrate DB from prod to dev
+- [x] Create a dev endpoint with dev-read project
+- [x] Create a script to migrate DB from prod to dev
 - [x] Migrate from travis to github actions for client deployment
 - [x] Create github actions for cloud run deployment
 - [ ] Add edit function (#42)

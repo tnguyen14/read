@@ -38,7 +38,7 @@ module.exports.showList = function (params) {
 	});
 };
 
-module.exports.newList = function (params, callback) {
+module.exports.newList = function (params) {
 	if (!params.name) {
 		return Promise.reject(missingListNameError);
 	}
