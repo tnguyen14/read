@@ -1,0 +1,9 @@
+- [x] Create svelte store for articles and use it with autosubscription. Does that mean the AJAX call to get articles will be done by the store?
+- [x] Update the store when the new article is created successfully
+- [x] Clear out the form on successfully creation
+- [x] Delete article functionality
+- [x] Delete old code
+- [ ] Create a dev endpoint with dev-read project
+- [ ] Create a script to migrate DB from prod to dev
+- [x] Migrate from travis to github actions for client deployment
+- [ ] Create github actions for cloud run deployment
