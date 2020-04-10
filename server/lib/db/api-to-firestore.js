@@ -39,34 +39,34 @@ getJson(`${serverUrl}`, {
 		console.error(err);
 	});
 
-function writeList(list) {
+async function writeList(list) {
 	const listRef = firestore.doc(`lists/${list.user}!${list.id}`);
 	return listRef.set(list).then(() => {
 		console.log(`Successfully created list ${list.id} for user ${list.user}`);
 	});
 }
 
-function writeArticlesInChunks(list) {
-	return getJson(`${serverUrl}/${list.id}/articles`, {
+async function writeArticlesInChunks(list) {
+	const articles = await getJson(`${serverUrl}/${list.id}/articles`, {
 		headers: {
 			Authorization: `Bearer ${authToken}`
 		}
-	}).then((articles) => {
-		if (!articles.length) {
-			return;
-		}
-		console.log(`Writing ${articles.length} articles...`);
-		const articlesChunks = chunk(articles, firestore.batchSize);
+	})
+	if (!articles.length) {
+		return;
+	}
+	console.log(`Writing ${articles.length} articles...`);
+	const articlesChunks = chunk(articles, firestore.batchSize);
 
-		return Promise.all(articlesChunks.map(writeArticles.bind(null, list))).then(
+	return Promise.all(articlesChunks.map(writeArticles.bind(null, list)))
+		.then(
 			() => {
-				console.log(`Finished writing all articles for list ${list.id}`);
+				console.log(`Finished writing articles for list ${list.id}`);
 			}
 		);
-	});
 }
 
-function writeArticles(list, articles) {
+async function writeArticles(list, articles) {
 	const writeBatch = firestore.batch();
 
 	articles.forEach((article) => {

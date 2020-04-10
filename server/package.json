@@ -19,8 +19,8 @@
     "nodemon": "^1.18.10"
   },
   "scripts": {
-    "start": "NODE_ENV=development nodemon ./lib/app.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "PORT=13042 NODE_ENV=development nodemon ./lib/app.js",
+    "db:migrate:apiToFirestore": "node lib/db/api-to-firestore.js",
     "server": "node ./lib/app.js"
   },
   "dependencies": {
