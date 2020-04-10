@@ -4,14 +4,10 @@
   "description": "",
   "main": "index.html",
   "scripts": {
-    "js": "NODE_ENV=production browserify -t hbsfy -t aliasify -g loose-envify client/js/app.js -o dist/main.js",
-    "js:watch": "NODE_ENV=development watchify -t hbsfy -t aliasify -g loose-envify client/js/app.js -o dist/main.js",
     "clean": "rm -rf dist && mkdir dist",
     "copy": "cp -r client/static/* dist",
     "build": "npm run clean && npm run copy && rollup -c",
     "dev": "rollup -c -w -m",
-    "watch": "npm run js:watch & npm run serve",
-    "start": "npm run build && npm run watch",
     "deploy": "npm run build && gh-pages -d dist"
   },
   "repository": {
