@@ -66,6 +66,7 @@
     font-size: 0.9em;
     line-height: 1.4;
     margin: 0 0 0.5em 0;
+    width: calc(100% - 2rem); /* 2rem to accommodate delete icon */
   }
   .title a {
     color: var(--primary-color-dark);
@@ -91,9 +92,9 @@
   .article:hover .article-remove:hover {
     opacity: 1;
   }
-  .article .content {
-    height: calc(100% - 1.26em - 0.45em);
-    overflow: scroll;
+  .content {
+    height: 10rem;
+    overflow: auto;
   }
   .content p {
     margin: 0;
