@@ -1,4 +1,6 @@
 <script>
+  import { onMount } from 'svelte';
+  import { articles } from './stores.js';
   let url, title, description;
   const baseUrl = 'https://read.cloud.tridnguyen.com';
   let isRetrieving = false;
@@ -9,9 +11,43 @@
     }
     isRetrieving = true;
     title = description = 'Retrieving...';
-   ({title, description}= await fetch(`${baseUrl}/extract?url=${encodeURIComponent(url)}`)
+    ({title, description} = await fetch(
+      `${baseUrl}/extract?url=${encodeURIComponent(url)}`)
       .then(r => r.json()))
     isRetrieving = false;
+  }
+  $: isSubmittable = !isRetrieving && (
+    !!url && !!title && !!description
+  )
+
+  async function addArticle(e) {
+    if (!isSubmittable) {
+      return;
+    }
+    e.preventDefault();
+    const newArticle = {
+      link: url,
+      title,
+      description
+    };
+    const resp = await fetch(`${baseUrl}/tri/articles`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(newArticle)
+    }).then(r => r.json())
+    articles.update(n => {
+      n.unshift({
+        ...newArticle,
+        id: resp.id
+      });
+      return n;
+    });
+    // reset
+    url = '';
+    title = '';
+    description = '';
   }
 </script>
 
@@ -35,7 +71,8 @@
     <label for="description">Description</label>
     <textarea name="description" id="description" bind:value={description}></textarea>
   </div>
-  <button type="submit">Save</button>
+  <input type="submit" disabled={!isSubmittable} 
+         on:click={addArticle} value="Save" />
 </form>
 
 <style>
@@ -77,10 +114,16 @@
   textarea {
     height: 7em;
   }
-  button {
+  button,
+  [type='submit']{
     float: right;
+    width: auto;
   }
   .inactive {
     display: none;
+  }
+  input:disabled {
+    background-color: var(--divider-color);
+    cursor: auto;
   }
 </style>

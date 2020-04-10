@@ -1,11 +1,12 @@
 <script>
   import { onMount } from 'svelte';
+  import { articles } from './stores.js';
   import Article from './Article.svelte';
   const baseUrl = 'https://read.cloud.tridnguyen.com';
-  let articles;
 
   onMount(async () => {
-    articles = await fetch(`${baseUrl}/tri/articles`).then((r) => r.json());
+    const resp = await fetch(`${baseUrl}/tri/articles`).then((r) => r.json());
+    articles.update(n => n.concat(resp));
   });
 </script>
 
@@ -18,9 +19,9 @@
   }
 </style>
 
-{#if articles}
+{#if $articles}
   <div class="articles">
-    {#each articles as article}
+    {#each $articles as article}
       <Article {article} />
     {/each}
   </div>
