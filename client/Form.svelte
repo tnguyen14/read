@@ -55,17 +55,28 @@
     title = undefined;
     description = undefined;
   }
+  async function paste() {
+    if (!navigator.clipboard.readText) {
+      return;
+    }
+    const clipText = await navigator.clipboard.readText();
+    url = clipText;
+  }
 </script>
 
 <form class="clearfix">
   <h2 class="title">Save an article</h2>
   <div class="field">
     <label for="link">Link URL</label>
-    <input type="url" class="has-action"
+    <button class="input-action before" type="button" title="Paste from clipboard" on:click={paste}>
+      <i class="material-icons">file_copy</i>
+    </button>
+    <input type="url" class="link"
       placeholder="https://coolstuff.com"
       id="link" name="link" bind:value={url}
       on:change={extract}/>
-    <button class="input-action" type="button" disabled={isRetrieving}
+    <button class="input-action after" type="button" title="Retrieve"
+      disabled={isRetrieving}
       on:click={extract}>
       <i class="material-icons">get_app</i>
     </button>
@@ -78,7 +89,7 @@
     <label for="description">Description</label>
     <textarea name="description" id="description" bind:value={description}></textarea>
   </div>
-  <input type="submit" disabled={!isSubmittable}
+  <input class="save" type="submit" disabled={!isSubmittable}
          on:click={addArticle} value="Save" />
 </form>
 
@@ -100,31 +111,38 @@
     margin: 2em 0;
   }
   label {
-    display: inline-block;
+    float: left;
+    padding: 1em;
     width: 25%;
   }
   input,
   textarea {
     padding: 1em;
     vertical-align: middle;
-    width: 74%; /* not sure why 75% push the text box down */
+    width: 75%;
   }
-  input.has-action {
-    width: calc(74% - 3em); /* not sure why 3 is needed instead of 2.8 */
+  input.link {
+    width: calc(75% - 5.6rem);
   }
   .input-action {
     background-color: var(--divider-color);
     padding: 5px;
-    width: 2.8em;
-    height: 2.8em;
+    width: 2.8rem;
+    height: 2.8rem;
   }
   textarea {
     height: 7em;
   }
   button,
   [type='submit']{
-    float: right;
     width: auto;
+  }
+  .input-action.before {
+    float: left;
+  }
+  .input-action.after,
+  .save {
+    float: right;
   }
   .inactive {
     display: none;

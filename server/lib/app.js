@@ -11,7 +11,7 @@ const cors = corsMiddleware({
 	origins: [
 		'localhost',
 		'https://tridnguyen.com',
-		'https://home.tridnguyen.com'
+		'https://lab.tridnguyen.com'
 	]
 });
 
