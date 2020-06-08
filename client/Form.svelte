@@ -89,7 +89,7 @@
     <label for="description">Description</label>
     <textarea name="description" id="description" bind:value={description}></textarea>
   </div>
-  <input class="save" type="submit" disabled={!isSubmittable}
+  <input class="save-article" type="submit" disabled={!isSubmittable}
          on:click={addArticle} value="Save" />
 </form>
 
@@ -111,18 +111,33 @@
     margin: 2em 0;
   }
   label {
-    float: left;
-    padding: 1em;
-    width: 25%;
+    display: block;
+    padding: 1em 0;
+  }
+  @media (min-width: 37.5em) {
+    label {
+      float: left;
+      width: 25%;
+      padding: 1em;
+    }
   }
   input,
   textarea {
     padding: 1em;
     vertical-align: middle;
-    width: 75%;
+    width: 100%;
   }
   input.link {
-    width: calc(75% - 5.6rem);
+    width: calc(100% - 5.6rem);
+  }
+  @media (min-width: 37.5em) {
+    input,
+    textarea {
+      width: 75%;
+    }
+    input.link {
+      width: calc(75% - 5.6rem);
+    }
   }
   .input-action {
     background-color: var(--divider-color);
@@ -141,7 +156,7 @@
     float: left;
   }
   .input-action.after,
-  .save {
+  .save-article {
     float: right;
   }
   .inactive {

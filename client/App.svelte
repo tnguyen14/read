@@ -19,7 +19,12 @@
     box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.16),
       0px 0px 5px 0px rgba(0, 0, 0, 0.23);
     border-radius: 0 0 3px 3px;
-    margin: 2rem auto;
+    margin: .5rem auto;
+  }
+  @media (min-width: 42.5em) {
+    .save {
+      margin: 2rem auto;
+    }
   }
 </style>
 
