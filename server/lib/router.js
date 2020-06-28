@@ -2,7 +2,6 @@
 
 const list = require('./controllers/list');
 const articles = require('./controllers/articles');
-const extract = require('./controllers/extract');
 const logger = require('./logger');
 
 function route(controller) {
@@ -21,9 +20,6 @@ function route(controller) {
 }
 
 module.exports = function router(server) {
-	// extract
-	server.get('/extract', route(extract));
-
 	// list routes
 	server.get('/', route(list.showAll));
 	server.post('/', route(list.newList));
