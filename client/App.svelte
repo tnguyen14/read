@@ -4,9 +4,11 @@
   import { user } from './stores.js';
   import { getSession } from '@tridnguyen/auth';
 
-  const session = getSession();
-  if (session) {
-    user.set(session);
+  function handleVisibilityChange() {
+    if (!document.hidden) {
+      const session = getSession();
+      user.set(session || {});
+    }
   }
 </script>
 
@@ -34,6 +36,8 @@
     }
   }
 </style>
+
+<svelte:window on:visibilitychange={handleVisibilityChange}/>
 
 <main>
   <div class="save">
