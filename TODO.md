@@ -13,3 +13,4 @@
 - [ ] Add menu item on top right (3 dots) with 2 options, Delete and Edit (#42). This will mean implementing a popup for delete confirmation.
 - [ ] Add button to clear form content
 - [ ] Show article media
+- [ ] Abstract server controllers into generic firestore endpoints, with support for public GET access configuration at the database level

@@ -17,6 +17,18 @@
   getUserSession();
 </script>
 
+<svelte:window on:visibilitychange={handleVisibilityChange}/>
+
+<main>
+  <div class="save">
+    <h1>Read</h1>
+    {#if $user.profile}
+      <Form />
+    {/if}
+  </div>
+  <Articles />
+</main>
+
 <style>
   main:before {
     background-color: var(--primary-color);
@@ -40,16 +52,11 @@
       margin: 2rem auto;
     }
   }
+  h1 {
+    background-color: var(--primary-color-light);
+    color: var(--primary-color-dark);
+    margin: 0;
+    width: 100%;
+  }
 </style>
 
-<svelte:window on:visibilitychange={handleVisibilityChange}/>
-
-<main>
-  <div class="save">
-    <h1>Read</h1>
-    {#if $user.profile}
-      <Form />
-    {/if}
-  </div>
-  <Articles />
-</main>
