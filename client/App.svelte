@@ -20,12 +20,10 @@
 <svelte:window on:visibilitychange={handleVisibilityChange}/>
 
 <main>
-  <div class="save">
-    <h1>Read</h1>
-    {#if $user.profile}
-      <Form />
-    {/if}
-  </div>
+  <h1>Read</h1>
+  {#if $user.profile}
+    <Form />
+  {/if}
   <Articles />
 </main>
 
@@ -40,23 +38,18 @@
     left: 0;
     z-index: -1;
   }
-  .save {
-    background-color: #fff;
-    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.16),
-      0px 0px 5px 0px rgba(0, 0, 0, 0.23);
-    border-radius: 0 0 3px 3px;
-    margin: .5rem auto;
-  }
-  @media (min-width: 42.5em) {
-    .save {
-      margin: 2rem auto;
-    }
-  }
   h1 {
-    background-color: var(--primary-color-light);
-    color: var(--primary-color-dark);
-    margin: 0;
+    color: var(--primary-color-text);
+    margin: 1rem auto;
+    padding: 0.5rem 1rem;
     width: 100%;
+  }
+  @media (min-width: 37.5em) {
+    h1 {
+      margin: 2rem auto;
+      padding: 0.75rem 2rem;
+      width: 80%;
+    }
   }
 </style>
 

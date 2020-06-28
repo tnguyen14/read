@@ -29,31 +29,6 @@ body {
   color: var(--primary-text-color);
 }
 
-.section-title,
-.save,
-.articles {
-  margin: 0 auto;
-  width: 100%;
-}
-@media (min-width: 37.5em) {
-  .section-title,
-  .save,
-  .articles {
-    width: 80%;
-  }
-}
-
-h1,
-.section-title {
-  padding: 0.5rem 1rem;
-}
-@media (min-width: 37.5em) {
-  h1,
-  .section-title {
-    padding: 0.75rem 2rem;
-  }
-}
-
 .loader {
   border-color: rgba(0, 0, 0, 0.2);
   border-top-color: rgba(0, 0, 0, 1);

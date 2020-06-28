@@ -25,7 +25,13 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
-    margin-top: 1rem;
+    margin: 1rem auto;
+    width: 100%;
+  }
+  @media (min-width: 37.5em) {
+    .articles {
+      width: 80%;
+    }
   }
 </style>
 
