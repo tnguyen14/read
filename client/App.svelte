@@ -8,6 +8,7 @@
     const session = getSession();
     user.set(session || {});
   }
+
   function handleVisibilityChange() {
     if (!document.hidden) {
       getUserSession();
