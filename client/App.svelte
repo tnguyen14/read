@@ -4,12 +4,17 @@
   import { user } from './stores.js';
   import { getSession } from '@tridnguyen/auth';
 
+  function getUserSession() {
+    const session = getSession();
+    user.set(session || {});
+  }
   function handleVisibilityChange() {
     if (!document.hidden) {
-      const session = getSession();
-      user.set(session || {});
+      getUserSession();
     }
   }
+
+  getUserSession();
 </script>
 
 <style>

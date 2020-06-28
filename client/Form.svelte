@@ -11,7 +11,7 @@
     isRetrieving = true;
     title = description = 'Retrieving...';
     ({title, description} = await fetch(
-      `${API_URL}/extract?url=${encodeURIComponent(url)}`)
+      `${THIRDPARTY_API_URL}/embedly?url=${encodeURIComponent(url)}`)
       .then(r => r.json()))
     if (!title) {
       title = 'Error - no title found';
