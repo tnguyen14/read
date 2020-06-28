@@ -9,3 +9,4 @@
 - [x] Create github actions for cloud run deployment
 - [ ] Add edit function (#42)
 - [ ] Add menu item on top right (3 dots) with 2 options, Delete and Edit (#42). This will mean implementing a popup for delete confirmation.
+- [ ] Add button to clear form content

@@ -1,5 +1,6 @@
 <script>
   import { createEventDispatcher } from 'svelte';
+  import { user } from './stores.js';
 
   const dispatch = createEventDispatcher();
 
@@ -26,11 +27,14 @@
 </script>
 
 <div class="article">
-  <button type="button" class="article-remove {deleteClickedOnce ? 'confirm' : ''}"
-    title={title} on:click={deleteArticle}
-    aria-label="remove article" data-confirm="false">
-    <i class="material-icons">delete</i>
-  </button>
+  {#if $user.profile}
+    <button type="button"
+            class="article-remove {deleteClickedOnce ? 'confirm' : ''}"
+            title={title} on:click={deleteArticle}
+            aria-label="remove article" data-confirm="false">
+      <i class="material-icons">delete</i>
+    </button>
+  {/if}
   <h3 class="title">
     <a href="{article.link}">
       {article.title}

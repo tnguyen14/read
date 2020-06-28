@@ -1,6 +1,13 @@
 <script>
   import Form from './Form.svelte';
   import Articles from './Articles.svelte';
+  import { user } from './stores.js';
+  import { getSession } from '@tridnguyen/auth';
+
+  const session = getSession();
+  if (session) {
+    user.set(session);
+  }
 </script>
 
 <style>
@@ -31,7 +38,9 @@
 <main>
   <div class="save">
     <h1>Read</h1>
-    <Form />
+    {#if $user.profile}
+      <Form />
+    {/if}
   </div>
   <Articles />
 </main>
