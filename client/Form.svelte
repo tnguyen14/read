@@ -10,9 +10,9 @@
     }
     isRetrieving = true;
     title = description = 'Retrieving...';
-    ({title, description} = await fetch(
-      `${THIRDPARTY_API_URL}/embedly?url=${encodeURIComponent(url)}`)
-      .then(r => r.json()))
+    ({ title, description } = await fetch(
+      `${THIRDPARTY_API_URL}/embedly?url=${encodeURIComponent(url)}`
+    ).then((r) => r.json()));
     if (!title) {
       title = 'Error - no title found';
     }
@@ -22,9 +22,7 @@
     }
     isRetrieving = false;
   }
-  $: isSubmittable = !isRetrieving && (
-    !!url && !!title
-  )
+  $: isSubmittable = !isRetrieving && !!url && !!title;
 
   async function addArticle(e) {
     if (!isSubmittable) {
@@ -42,8 +40,8 @@
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(newArticle)
-    }).then(r => r.json())
-    articles.update(n => {
+    }).then((r) => r.json());
+    articles.update((n) => {
       n.unshift({
         ...newArticle,
         id: resp.id
@@ -68,14 +66,25 @@
   <h2 class="title">Save an article</h2>
   <div class="field">
     <label for="link">Link URL</label>
-    <button class="input-action before" type="button" title="Paste from clipboard" on:click={paste}>
+    <button
+      class="input-action before"
+      type="button"
+      title="Paste from clipboard"
+      on:click={paste}>
       <i class="material-icons">file_copy</i>
     </button>
-    <input type="url" class="link"
+    <input
+      type="url"
+      class="link"
       placeholder="https://coolstuff.com"
-      id="link" name="link" bind:value={url}
-      on:change={extract}/>
-    <button class="input-action after" type="button" title="Retrieve"
+      id="link"
+      name="link"
+      bind:value={url}
+      on:change={extract} />
+    <button
+      class="input-action after"
+      type="button"
+      title="Retrieve"
       disabled={isRetrieving}
       on:click={extract}>
       <i class="material-icons">get_app</i>
@@ -83,14 +92,18 @@
   </div>
   <div class="field {title != undefined ? '' : 'inactive'}">
     <label for="title">Title</label>
-    <input name="title" type="text" id="title" bind:value={title}/>
+    <input name="title" type="text" id="title" bind:value={title} />
   </div>
   <div class="field {description != undefined ? '' : 'inactive'}">
     <label for="description">Description</label>
-    <textarea name="description" id="description" bind:value={description}></textarea>
+    <textarea name="description" id="description" bind:value={description} />
   </div>
-  <input class="save-article" type="submit" disabled={!isSubmittable}
-         on:click={addArticle} value="Save" />
+  <input
+    class="save-article"
+    type="submit"
+    disabled={!isSubmittable}
+    on:click={addArticle}
+    value="Save" />
 </form>
 
 <style>
@@ -100,7 +113,7 @@
     box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.16),
       0px 0px 5px 0px rgba(0, 0, 0, 0.23);
     border-radius: 0 0 3px 3px;
-    margin: .5rem auto;
+    margin: 0.5rem auto;
     width: 100%;
   }
   @media (min-width: 37.5em) {
@@ -157,7 +170,7 @@
     height: 7em;
   }
   button,
-  [type='submit']{
+  [type='submit'] {
     width: auto;
   }
   .input-action.before {

@@ -51,19 +51,18 @@ async function writeArticlesInChunks(list) {
 		headers: {
 			Authorization: `Bearer ${authToken}`
 		}
-	})
+	});
 	if (!articles.length) {
 		return;
 	}
 	console.log(`Writing ${articles.length} articles...`);
 	const articlesChunks = chunk(articles, firestore.batchSize);
 
-	return Promise.all(articlesChunks.map(writeArticles.bind(null, list)))
-		.then(
-			() => {
-				console.log(`Finished writing articles for list ${list.id}`);
-			}
-		);
+	return Promise.all(articlesChunks.map(writeArticles.bind(null, list))).then(
+		() => {
+			console.log(`Finished writing articles for list ${list.id}`);
+		}
+	);
 }
 
 async function writeArticles(list, articles) {

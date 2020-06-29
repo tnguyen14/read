@@ -28,4 +28,3 @@ jobs:
           git commit --no-verify -m "Update from commit $GITHUB_SHA"
           git subtree split --prefix dist -b gh-pages
           git push -f origin gh-pages:gh-pages
-

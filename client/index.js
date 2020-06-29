@@ -5,8 +5,8 @@ window.THIRDPARTY_API_URL = '__THIRDPARTY_API_URL__';
 window.COLLECTION = 'tri';
 
 const app = new App({
-  target: document.body,
-  props: {}
+	target: document.body,
+	props: {}
 });
 
 export default app;

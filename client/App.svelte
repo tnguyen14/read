@@ -18,7 +18,7 @@
   getUserSession();
 </script>
 
-<svelte:window on:visibilitychange={handleVisibilityChange}/>
+<svelte:window on:visibilitychange={handleVisibilityChange} />
 
 <main>
   <h1>Read</h1>
@@ -53,4 +53,3 @@
     }
   }
 </style>
-

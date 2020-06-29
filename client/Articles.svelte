@@ -4,21 +4,29 @@
   import Article from './Article.svelte';
 
   onMount(async () => {
-    const resp = await fetch(
-      `${API_URL}/${COLLECTION}/articles`
-    ).then((r) => r.json());
-    articles.update(n => n.concat(resp));
+    const resp = await fetch(`${API_URL}/${COLLECTION}/articles`).then((r) =>
+      r.json()
+    );
+    articles.update((n) => n.concat(resp));
   });
 
   function removeArticle(e) {
     const articleToDelete = e.detail.id;
     const deleteIndex = $articles.findIndex((a) => a.id == articleToDelete);
-    articles.update(n => {
+    articles.update((n) => {
       n.splice(deleteIndex, 1);
       return n;
     });
   }
 </script>
+
+{#if $articles}
+  <div class="articles">
+    {#each $articles as article}
+      <Article {article} on:article:deleted={removeArticle} />
+    {/each}
+  </div>
+{/if}
 
 <style>
   .articles {
@@ -34,11 +42,3 @@
     }
   }
 </style>
-
-{#if $articles}
-  <div class="articles">
-    {#each $articles as article}
-      <Article {article} on:article:deleted={removeArticle} />
-    {/each}
-  </div>
-{/if}

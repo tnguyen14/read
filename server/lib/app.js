@@ -8,11 +8,7 @@ var server = restify.createServer({
 
 const corsMiddleware = require('restify-cors-middleware');
 const cors = corsMiddleware({
-	origins: [
-		'localhost',
-		'https://tridnguyen.com',
-		'https://lab.tridnguyen.com'
-	]
+	origins: ['localhost', 'https://tridnguyen.com', 'https://lab.tridnguyen.com']
 });
 
 server.pre(cors.preflight);
