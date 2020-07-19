@@ -2,7 +2,6 @@
   import Form from './Form.svelte';
   import Articles from './Articles.svelte';
   import { user } from './stores.js';
-  /* import history from 'history/browser'; */
   import { getSession, deleteSession, createAuth } from '@tridnguyen/auth';
 
   const auth = createAuth();
@@ -27,21 +26,13 @@
     getUserSession();
   }
 
-  if (window.location.hash.startsWith('#access_token')) {
-    auth.handleCallback((err) => {
-      if (err) {
-        console.error(err);
-        return;
-      }
-      /*
-      can't use history module yet due to
-      https://github.com/ReactTraining/history/issues/821
-      */
-      /* history.replace(location.pathname); */
-      history.replaceState(null, '', location.pathname);
-      getUserSession();
-    });
-  }
+  auth.handleCallback((err) => {
+    if (err) {
+      console.error(err);
+      return;
+    }
+    getUserSession();
+  });
 
   getUserSession();
 </script>
