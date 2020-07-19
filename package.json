@@ -35,8 +35,7 @@
     "svelte": "^3.20.1"
   },
   "dependencies": {
-    "@tridnguyen/auth": "^5.1.0",
-    "history": "^5.0.0"
+    "@tridnguyen/auth": "^5.2.3"
   },
   "prettier": {
     "singleQuote": true,

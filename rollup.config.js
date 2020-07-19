@@ -16,12 +16,12 @@ export default {
 	},
 	plugins: [
 		replace({
-			__API_URL__: process.env.ROLLUP_WATCH
-				? 'https://api.tridnguyen.com/read'
-				: 'https://read.cloud.tridnguyen.com',
-			__THIRDPARTY_API_URL__: process.env.ROLLUP_WATCH
-				? 'https://api.tridnguyen.com/thirdparty'
-				: 'https://thirdparty.cloud.tridnguyen.com'
+			__API_URL__: production
+				? 'https://read.cloud.tridnguyen.com'
+				: 'https://api.tridnguyen.com/read',
+			__THIRDPARTY_API_URL__: production
+				? 'https://thirdparty.cloud.tridnguyen.com'
+				: 'https://api.tridnguyen.com/thirdparty'
 		}),
 		svelte({
 			dev: !production,
