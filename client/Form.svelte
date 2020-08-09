@@ -30,6 +30,7 @@
     }
     e.preventDefault();
     const newArticle = {
+      id: String(Date.now()),
       link: url,
       title,
       description
