@@ -1,6 +1,7 @@
 <script>
   import { createEventDispatcher } from 'svelte';
   import { user } from './stores.js';
+  import { deleteJson } from 'simple-fetch';
 
   const dispatch = createEventDispatcher();
 
@@ -17,8 +18,10 @@
       title = 'Click again to delete article';
       return;
     }
-    await fetch(`${API_URL}/${COLLECTION}/articles/${article.id}`, {
-      method: 'DELETE'
+    await deleteJson(`${API_URL}/${COLLECTION}/items/${article.id}`, {
+      headers: {
+        Authorization: `Bearer ${$user.idToken}`
+      }
     });
     dispatch('article:deleted', {
       id: article.id

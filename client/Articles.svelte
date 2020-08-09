@@ -1,17 +1,15 @@
 <script>
   import { onMount } from 'svelte';
   import { articles } from './stores.js';
+  import { getJson } from 'simple-fetch';
   import Article from './Article.svelte';
 
   onMount(async () => {
-    const resp = await fetch(`${API_URL}/${COLLECTION}/items`)
-      .then((r) => r.json())
-      .then((articles) => {
-        return articles.sort((a, b) => {
-          // sort by id (which is time)
-          return Number(b.id) - Number(a.id);
-        });
-      });
+    const resp = await getJson(`${API_URL}/${COLLECTION}/items`);
+    resp.sort((a, b) => {
+      // sort by id (which is time)
+      return Number(b.id) - Number(a.id);
+    });
     articles.update((n) => n.concat(resp));
   });
 

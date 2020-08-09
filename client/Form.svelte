@@ -1,6 +1,7 @@
 <script>
   import { onMount } from 'svelte';
-  import { articles } from './stores.js';
+  import { articles, user } from './stores.js';
+  import { postJson } from 'simple-fetch';
   let url, title, description;
   let isRetrieving = false;
   async function extract() {
@@ -35,13 +36,11 @@
       title,
       description
     };
-    const resp = await fetch(`${API_URL}/${COLLECTION}/`, {
-      method: 'POST',
+    const resp = await postJson(`${API_URL}/${COLLECTION}/`, newArticle, {
       headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(newArticle)
-    }).then((r) => r.json());
+        Authorization: `Bearer ${$user.idToken}`
+      }
+    });
     articles.update((n) => {
       n.unshift({
         ...newArticle,
