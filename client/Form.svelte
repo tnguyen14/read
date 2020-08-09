@@ -34,7 +34,7 @@
       title,
       description
     };
-    const resp = await fetch(`${API_URL}/${COLLECTION}/articles`, {
+    const resp = await fetch(`${API_URL}/${COLLECTION}/`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

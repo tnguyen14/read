@@ -18,7 +18,7 @@ export default {
 		replace({
 			__API_URL__: production
 				? 'https://read.cloud.tridnguyen.com'
-				: 'https://api.tridnguyen.com/read',
+				: 'https://api.tridnguyen.com/lists/read',
 			__THIRDPARTY_API_URL__: production
 				? 'https://thirdparty.cloud.tridnguyen.com'
 				: 'https://api.tridnguyen.com/thirdparty'

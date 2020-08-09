@@ -4,9 +4,14 @@
   import Article from './Article.svelte';
 
   onMount(async () => {
-    const resp = await fetch(`${API_URL}/${COLLECTION}/articles`).then((r) =>
-      r.json()
-    );
+    const resp = await fetch(`${API_URL}/${COLLECTION}/items`)
+      .then((r) => r.json())
+      .then((articles) => {
+        return articles.sort((a, b) => {
+          // sort by id (which is time)
+          return Number(b.id) - Number(a.id);
+        });
+      });
     articles.update((n) => n.concat(resp));
   });
 
