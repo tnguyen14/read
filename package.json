@@ -5,7 +5,7 @@
   "main": "index.html",
   "scripts": {
     "clean": "rm -rf dist && mkdir dist",
-    "copy": "cp -r client/static/* dist",
+    "copy": "cp -r static/* dist",
     "build": "npm run clean && npm run copy && rollup -c",
     "dev": "rollup -c -w -m",
     "deploy": "npm run build && gh-pages -d dist"

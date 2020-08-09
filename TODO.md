@@ -7,10 +7,10 @@
 - [x] Create a script to migrate DB from prod to dev
 - [x] Migrate from travis to github actions for client deployment
 - [x] Create github actions for cloud run deployment
-- [ ] Implement login flow
-- [ ] Add JWT check for server write endpoints (add/ delete/ update article)
+- [x] Implement login flow
+- [x] Add JWT check for server write endpoints (add/ delete/ update article)
 - [ ] Add edit function (#42)
 - [ ] Add menu item on top right (3 dots) with 2 options, Delete and Edit (#42). This will mean implementing a popup for delete confirmation.
 - [ ] Add button to clear form content
 - [ ] Show article media
-- [ ] Abstract server controllers into generic firestore endpoints, with support for public GET access configuration at the database level
+- [x] Abstract server controllers into generic firestore endpoints, with support for public GET access configuration at the database level
